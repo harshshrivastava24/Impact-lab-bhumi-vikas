@@ -1,0 +1,14 @@
+{
+  "language": "en",
+  "params": {
+    "plot_area": 200,
+    "road_width": 9,
+    "use_type": "residential"
+  },
+  "topics": [
+    "front_setback",
+    "height_limit",
+    "permission_fee"
+  ],
+  "used_inference": false
+}

@@ -1,0 +1,39 @@
+/* Print: one A4 page, black on white, no fills except hatching (FR-33, FR-49). */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 10.5pt;
+  }
+
+  .screen-only {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .print-slip svg .envelope-fill {
+    fill: #ffffff !important;
+  }
+
+  .print-slip a {
+    color: #000000 !important;
+    text-decoration: none !important;
+  }
+
+  .print-slip section {
+    break-inside: avoid;
+  }
+}
+
+.print-only {
+  display: none;
+}

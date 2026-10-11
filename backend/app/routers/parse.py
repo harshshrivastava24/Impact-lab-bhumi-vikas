@@ -8,7 +8,7 @@ from backend.app.services.parser import detect_language, parse_text_rule_based, 
 router = APIRouter()
 
 
-@router.post("/parse", response_model=ParseResponse)
+@router.post("/parse", response_model=ParseResponse, response_model_exclude_none=True)
 async def parse_text(req: ParseRequest, request: Request) -> ParseResponse:
     settings = request.app.state.settings
     text = req.text.strip()

@@ -46,9 +46,10 @@ def exceptions() -> list:
 
 @lru_cache
 def strings(language: str) -> dict:
-    base = _load("strings.en.json")
+    """Plan-check response text: the planCheckApi section of the shared interface strings."""
+    base = _load("strings.en.json")["planCheckApi"]
     if language == "hi":
-        base = {**base, **_load("strings.hi.json")}
+        base = {**base, **_load("strings.hi.json")["planCheckApi"]}
     return base
 
 

@@ -23,9 +23,9 @@ Never describe the tool as a chatbot, assistant or conversational agent in code,
 | Layer | Choice | Reason |
 |---|---|---|
 | Backend | Python 3.11, FastAPI, Uvicorn | Readable by department staff; no GPU; JSONL handling trivial |
-| Frontend | React 18, Vite, TypeScript | Fast to build; static output served by the backend |
+| Frontend | React 18, Vite, TypeScript (strict), Tailwind CSS v4 | Fast to build; static output served by the backend; full frontend stack in `frontend-phases/frontend-phases.md` |
 | Drawing | Inline SVG rendered by React | No canvas library; scales cleanly; printable |
-| Tests | pytest (backend), Vitest (frontend) | Standard |
+| Tests | pytest (backend), Vitest and Playwright (frontend) | Standard |
 | Data | JSON and JSONL files in `data/` and `config/` | Corpus update without code change (FR-36) |
 
 Final run steps must be five or fewer, for example: clone, create venv, pip install, npm install and build, run uvicorn.

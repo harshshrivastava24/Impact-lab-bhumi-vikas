@@ -1,0 +1,114 @@
+@import 'tailwindcss';
+
+/* Fonts are self-hosted through @fontsource (no CDN calls, NFR-16). */
+@import '@fontsource/noto-sans/400.css';
+@import '@fontsource/noto-sans/600.css';
+@import '@fontsource/noto-sans/700.css';
+@import '@fontsource/noto-sans-devanagari/400.css';
+@import '@fontsource/noto-sans-devanagari/600.css';
+@import '@fontsource/noto-sans-devanagari/700.css';
+@import '@fontsource/noto-sans-mono/400.css';
+
+/*
+ * Design tokens. Source: ui-ux-pro-max design system (Minimalism & Swiss Style,
+ * high-contrast navy and blue), extended with semantic colours for this tool.
+ * Every pair is measured in docs/design-system.md.
+ */
+@theme {
+  --font-sans: 'Noto Sans', 'Noto Sans Devanagari', system-ui, sans-serif;
+  --font-hindi: 'Noto Sans Devanagari', 'Noto Sans', system-ui, sans-serif;
+  --font-mono: 'Noto Sans Mono', ui-monospace, monospace;
+
+  /* Brand and surfaces */
+  --color-primary: #0f172a;
+  --color-on-primary: #ffffff;
+  --color-on-primary-muted: #cbd5e1;
+  --color-accent: #0369a1;
+  --color-accent-hover: #075985;
+  --color-on-accent: #ffffff;
+  --color-background: #f8fafc;
+  --color-card: #ffffff;
+  --color-foreground: #020617;
+  --color-muted: #f1f5f9;
+  --color-muted-foreground: #475569;
+  --color-border: #e2e8f0;
+  --color-input-border: #64748b;
+  --color-ring: #0369a1;
+
+  /* Semantic: conflict, pass, warning (amendment), info */
+  --color-conflict: #b91c1c;
+  --color-conflict-text: #991b1b;
+  --color-conflict-tint: #fef2f2;
+  --color-pass: #15803d;
+  --color-pass-text: #166534;
+  --color-pass-tint: #f0fdf4;
+  --color-warning: #c2410c;
+  --color-warning-text: #7c2d12;
+  --color-warning-tint: #fff7ed;
+  --color-info: #0369a1;
+  --color-info-text: #0c4a6e;
+  --color-info-tint: #f0f9ff;
+
+  /* Drawing */
+  --color-envelope: #dbeafe;
+  --color-road: #e2e8f0;
+  --color-setback: #0369a1;
+
+  /* Type scale (body 16, labels 14, figures 28) */
+  --text-label: 0.875rem;
+  --text-label--line-height: 1.25rem;
+  --text-body: 1rem;
+  --text-body--line-height: 1.5rem;
+  --text-figure: 1.75rem;
+  --text-figure--line-height: 2.125rem;
+
+  /* Radius small, shadows minimal (Swiss) */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --shadow-card: 0 1px 2px 0 rgb(15 23 42 / 0.06);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    color: var(--color-foreground);
+    background: var(--color-background);
+    font-size: 16px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  :lang(hi) {
+    font-family: var(--font-hindi);
+  }
+
+  /* Visible focus on every interactive element. */
+  :focus-visible {
+    outline: 3px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+
+  button,
+  [role='button'],
+  summary,
+  label[for],
+  input[type='checkbox'],
+  input[type='radio'],
+  select {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@import './print.css';
