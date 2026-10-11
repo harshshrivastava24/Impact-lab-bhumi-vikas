@@ -23,7 +23,7 @@ if str(ROOT) not in sys.path:
 
 from backend.app.corpus import load_corpus          # noqa: E402
 from backend.app.config import load_settings        # noqa: E402
-from backend.app.routers import parse, lookup, rules_router, health  # noqa: E402
+from backend.app.routers import parse, lookup, rules_router, health, plan_check  # noqa: E402
 
 logging.basicConfig(
     level=logging.INFO,
@@ -68,6 +68,7 @@ def create_app() -> FastAPI:
     app.include_router(parse.router,         prefix="/api")
     app.include_router(lookup.router,        prefix="/api")
     app.include_router(rules_router.router,  prefix="/api")
+    app.include_router(plan_check.router,    prefix="/api")
 
     # Serve PDFs
     resources_dir = ROOT / "resources"

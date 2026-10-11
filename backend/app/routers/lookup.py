@@ -2,7 +2,7 @@
 Lookup router: POST /api/lookup
 Main computation and retrieval endpoint.
 Implements FR-14 to FR-27, FR-36, FR-38, FR-51.
-Also implements POST /api/plan-check returning 501 until Phase 3.
+POST /api/plan-check lives in routers/plan_check.py.
 """
 from __future__ import annotations
 
@@ -31,23 +31,6 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 NOT_FOUND_MSG = "Not found in MP Bhumi Vikas Rules 2012"
-
-
-# ---------------------------------------------------------------------------
-# /api/plan-check → 501 until Phase 3
-# ---------------------------------------------------------------------------
-
-@router.post("/plan-check")
-async def plan_check_stub():
-    return JSONResponse(
-        status_code=501,
-        content={
-            "detail": (
-                "Plan check (plot envelope drawing and setback verification) is not yet implemented. "
-                "It will be available in Phase 3 of this tool."
-            )
-        },
-    )
 
 
 # ---------------------------------------------------------------------------

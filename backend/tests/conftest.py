@@ -35,3 +35,11 @@ def settings():
     """Loaded settings."""
     from backend.app.config import load_settings
     return load_settings()
+
+
+@pytest.fixture(autouse=True)
+def log_to_tmp(tmp_path, monkeypatch):
+    """Plan-check audit entries go to a temporary file during tests."""
+    log = tmp_path / "queries.jsonl"
+    monkeypatch.setenv("BVS_LOG_PATH", str(log))
+    return log

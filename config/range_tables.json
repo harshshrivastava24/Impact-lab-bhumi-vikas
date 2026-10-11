@@ -10,26 +10,53 @@
     "verified_on": "2026-10-11",
     "rows": [
       {
-        "lower": null, "upper": 9.0,
-        "lower_inclusive": false, "upper_inclusive": true,
-        "value": 3.0, "label": "Up to 9.0 meters"
+        "lower": null,
+        "upper": 9.0,
+        "lower_inclusive": false,
+        "upper_inclusive": true,
+        "value": 3.0,
+        "label": "Up to 9.0 meters"
       },
       {
-        "lower": 9.0, "upper": 12.0,
-        "lower_inclusive": false, "upper_inclusive": true,
-        "value": 3.6, "label": "More than 9.0 and up to 12.0 meters"
+        "lower": 9.0,
+        "upper": 12.0,
+        "lower_inclusive": false,
+        "upper_inclusive": true,
+        "value": 3.6,
+        "label": "More than 9.0 and up to 12.0 meters"
       },
       {
-        "lower": 12.0, "upper": 18.0,
-        "lower_inclusive": false, "upper_inclusive": true,
-        "value": 4.5, "label": "More than 12.0 and up to 18.0 meters"
+        "lower": 12.0,
+        "upper": 18.0,
+        "lower_inclusive": false,
+        "upper_inclusive": true,
+        "value": 4.5,
+        "label": "More than 12.0 and up to 18.0 meters"
       },
       {
-        "lower": 18.0, "upper": null,
-        "lower_inclusive": false, "upper_inclusive": false,
-        "value": 6.0, "label": "Above 18.0 meters"
+        "lower": 18.0,
+        "upper": null,
+        "lower_inclusive": false,
+        "upper_inclusive": false,
+        "value": 6.0,
+        "label": "Above 18.0 meters"
       }
     ]
+  },
+  {
+    "id": "narrow_street_56_1b",
+    "rule": "56",
+    "sub_rule": "(1)(b)",
+    "title": "Building line on narrow streets in existing developed areas",
+    "page": 77,
+    "unit": "m",
+    "verified_by": "backend-engineer",
+    "verified_on": "2026-10-11",
+    "related_rules": [
+      "46"
+    ],
+    "street_width_below": 6.0,
+    "building_line_from_centre": 6.0
   },
   {
     "id": "rear_56_2a",
@@ -42,24 +69,36 @@
     "verified_on": "2026-10-11",
     "rows": [
       {
-        "lower": null, "upper": 40.0,
-        "lower_inclusive": false, "upper_inclusive": true,
-        "value": 0.0, "label": "Up to 40 sq m: nil"
+        "lower": null,
+        "upper": 40.0,
+        "lower_inclusive": false,
+        "upper_inclusive": true,
+        "value": 0.0,
+        "label": "Up to 40 sq m: nil"
       },
       {
-        "lower": 40.0, "upper": 150.0,
-        "lower_inclusive": false, "upper_inclusive": true,
-        "value": 1.50, "label": "Above 40 and up to 150 sq m: 1.50 m"
+        "lower": 40.0,
+        "upper": 150.0,
+        "lower_inclusive": false,
+        "upper_inclusive": true,
+        "value": 1.5,
+        "label": "Above 40 and up to 150 sq m: 1.50 m"
       },
       {
-        "lower": 150.0, "upper": 225.0,
-        "lower_inclusive": false, "upper_inclusive": true,
-        "value": 2.50, "label": "Above 150 and up to 225 sq m: 2.50 m"
+        "lower": 150.0,
+        "upper": 225.0,
+        "lower_inclusive": false,
+        "upper_inclusive": true,
+        "value": 2.5,
+        "label": "Above 150 and up to 225 sq m: 2.50 m"
       },
       {
-        "lower": 225.0, "upper": null,
-        "lower_inclusive": false, "upper_inclusive": false,
-        "value": 3.00, "label": "Above 225 sq m: 3.00 m"
+        "lower": 225.0,
+        "upper": null,
+        "lower_inclusive": false,
+        "upper_inclusive": false,
+        "value": 3.0,
+        "label": "Above 225 sq m: 3.00 m"
       }
     ]
   },
@@ -82,7 +121,15 @@
           "one_side_may_be": 1.5,
           "label": "One side may be 1.5 m if height up to 7 m and frontage under 12 m"
         },
-        "label": "Detached: 3.0 m both sides"
+        "label": "Detached: 3.0 m both sides",
+        "sub_rule": "(3)(i)",
+        "proviso_values": {
+          "reduced_value": 1.5,
+          "height_max": 7.0,
+          "height_max_inclusive": true,
+          "frontage_max": 12.0,
+          "frontage_max_inclusive": false
+        }
       },
       {
         "development_type": "semi_detached",
@@ -93,12 +140,21 @@
           "label": "Open side may be 2.5 m if height up to 10 m and frontage up to 10 m"
         },
         "attached_side": 0.0,
-        "label": "Semi-detached: 3.0 m one side (open), 0 attached side"
+        "label": "Semi-detached: 3.0 m one side (open), 0 attached side",
+        "sub_rule": "(3)(ii)",
+        "proviso_values": {
+          "reduced_value": 2.5,
+          "height_max": 10.0,
+          "height_max_inclusive": true,
+          "frontage_max": 10.0,
+          "frontage_max_inclusive": true
+        }
       },
       {
         "development_type": "row",
         "value": 0.0,
-        "label": "Row: nil both sides"
+        "label": "Row: nil both sides",
+        "sub_rule": "(3)(iii)"
       }
     ]
   },
@@ -114,26 +170,38 @@
     "rows": [
       {
         "development_type": "detached",
-        "area_lower": 225.0, "area_upper": null,
-        "area_lower_inclusive": false, "area_upper_inclusive": false,
-        "frontage_lower": 12.0, "frontage_upper": null,
-        "frontage_lower_inclusive": false, "frontage_upper_inclusive": false,
+        "area_lower": 225.0,
+        "area_upper": null,
+        "area_lower_inclusive": false,
+        "area_upper_inclusive": false,
+        "frontage_lower": 12.0,
+        "frontage_upper": null,
+        "frontage_lower_inclusive": false,
+        "frontage_upper_inclusive": false,
         "label": "Detached: above 225 sq m, frontage above 12 m"
       },
       {
         "development_type": "semi_detached",
-        "area_lower": 125.0, "area_upper": 225.0,
-        "area_lower_inclusive": true, "area_upper_inclusive": true,
-        "frontage_lower": 8.0, "frontage_upper": 12.0,
-        "frontage_lower_inclusive": true, "frontage_upper_inclusive": true,
+        "area_lower": 125.0,
+        "area_upper": 225.0,
+        "area_lower_inclusive": true,
+        "area_upper_inclusive": true,
+        "frontage_lower": 8.0,
+        "frontage_upper": 12.0,
+        "frontage_lower_inclusive": true,
+        "frontage_upper_inclusive": true,
         "label": "Semi-detached: 125 to 225 sq m, frontage 8 to 12 m"
       },
       {
         "development_type": "row",
-        "area_lower": 50.0, "area_upper": 225.0,
-        "area_lower_inclusive": true, "area_upper_inclusive": true,
-        "frontage_lower": 4.5, "frontage_upper": 12.0,
-        "frontage_lower_inclusive": true, "frontage_upper_inclusive": true,
+        "area_lower": 50.0,
+        "area_upper": 225.0,
+        "area_lower_inclusive": true,
+        "area_upper_inclusive": true,
+        "frontage_lower": 4.5,
+        "frontage_upper": 12.0,
+        "frontage_lower_inclusive": true,
+        "frontage_upper_inclusive": true,
         "label": "Row: 50 to 225 sq m, frontage 4.5 to 12 m"
       }
     ]
@@ -157,13 +225,13 @@
       {
         "use_type": "commercial",
         "category": "city_centre",
-        "value": 2.50,
+        "value": 2.5,
         "label": "Commercial (City Centre): 2.50"
       },
       {
         "use_type": "commercial",
         "category": "sub_city",
-        "value": 2.00,
+        "value": 2.0,
         "label": "Commercial (Sub-City Centre): 2.00"
       },
       {
@@ -175,7 +243,7 @@
       {
         "use_type": "commercial",
         "category": "local_shopping",
-        "value": 1.50,
+        "value": 1.5,
         "label": "Commercial (Local Shopping): 1.50"
       },
       {
@@ -187,7 +255,7 @@
       {
         "use_type": "public",
         "category": null,
-        "value": 1.00,
+        "value": 1.0,
         "label": "Public/Semi-Public: 1.00"
       },
       {
@@ -266,7 +334,7 @@
         "road_width_min": 36.0,
         "plot_area_min": 3000.0,
         "frontage_min": 40.0,
-        "far_max": 2.50,
+        "far_max": 2.5,
         "ground_coverage_pct": 30.0,
         "height_max": 60.0,
         "front_mos": 18.0,
@@ -326,7 +394,7 @@
       },
       {
         "fee_type": "building_permission",
-        "rate": 1.00,
+        "rate": 1.0,
         "basis": "per_sq_m_built_up",
         "label": "Building permission: Rs 1.00 per sq m built-up area; non-refundable"
       }
@@ -342,19 +410,110 @@
     "verified_by": "backend-engineer",
     "verified_on": "2026-10-11",
     "rows": [
-      { "lower": 0, "upper": 75, "lower_inclusive": true, "upper_inclusive": true, "value": 750, "label": "0 to 75 sq m: Rs 750" },
-      { "lower": 75, "upper": 125, "lower_inclusive": false, "upper_inclusive": true, "value": 1250, "label": "76 to 125 sq m: Rs 1,250" },
-      { "lower": 125, "upper": 200, "lower_inclusive": false, "upper_inclusive": true, "value": 2000, "label": "126 to 200 sq m: Rs 2,000" },
-      { "lower": 200, "upper": 300, "lower_inclusive": false, "upper_inclusive": true, "value": 3000, "label": "201 to 300 sq m: Rs 3,000" },
-      { "lower": 300, "upper": 400, "lower_inclusive": false, "upper_inclusive": true, "value": 4000, "label": "301 to 400 sq m: Rs 4,000" },
-      { "lower": 400, "upper": 600, "lower_inclusive": false, "upper_inclusive": true, "value": 6000, "label": "401 to 600 sq m: Rs 6,000" },
-      { "lower": 600, "upper": 750, "lower_inclusive": false, "upper_inclusive": true, "value": 7500, "label": "601 to 750 sq m: Rs 7,500" },
-      { "lower": 750, "upper": 1000, "lower_inclusive": false, "upper_inclusive": true, "value": 10000, "label": "751 to 1,000 sq m: Rs 10,000" },
-      { "lower": 1000, "upper": 1250, "lower_inclusive": false, "upper_inclusive": true, "value": 12500, "label": "1,001 to 1,250 sq m: Rs 12,500" },
-      { "lower": 1250, "upper": 1500, "lower_inclusive": false, "upper_inclusive": true, "value": 15000, "label": "1,251 to 1,500 sq m: Rs 15,000" },
-      { "lower": 1500, "upper": 2000, "lower_inclusive": false, "upper_inclusive": true, "value": 20000, "label": "1,501 to 2,000 sq m: Rs 20,000" },
-      { "lower": 2000, "upper": 2500, "lower_inclusive": false, "upper_inclusive": true, "value": 25000, "label": "2,001 to 2,500 sq m: Rs 25,000" },
-      { "lower": 2500, "upper": null, "lower_inclusive": false, "upper_inclusive": false, "value": 50000, "label": "Above 2,500 sq m: Rs 50,000" }
+      {
+        "lower": 0,
+        "upper": 75,
+        "lower_inclusive": true,
+        "upper_inclusive": true,
+        "value": 750,
+        "label": "0 to 75 sq m: Rs 750"
+      },
+      {
+        "lower": 75,
+        "upper": 125,
+        "lower_inclusive": false,
+        "upper_inclusive": true,
+        "value": 1250,
+        "label": "76 to 125 sq m: Rs 1,250"
+      },
+      {
+        "lower": 125,
+        "upper": 200,
+        "lower_inclusive": false,
+        "upper_inclusive": true,
+        "value": 2000,
+        "label": "126 to 200 sq m: Rs 2,000"
+      },
+      {
+        "lower": 200,
+        "upper": 300,
+        "lower_inclusive": false,
+        "upper_inclusive": true,
+        "value": 3000,
+        "label": "201 to 300 sq m: Rs 3,000"
+      },
+      {
+        "lower": 300,
+        "upper": 400,
+        "lower_inclusive": false,
+        "upper_inclusive": true,
+        "value": 4000,
+        "label": "301 to 400 sq m: Rs 4,000"
+      },
+      {
+        "lower": 400,
+        "upper": 600,
+        "lower_inclusive": false,
+        "upper_inclusive": true,
+        "value": 6000,
+        "label": "401 to 600 sq m: Rs 6,000"
+      },
+      {
+        "lower": 600,
+        "upper": 750,
+        "lower_inclusive": false,
+        "upper_inclusive": true,
+        "value": 7500,
+        "label": "601 to 750 sq m: Rs 7,500"
+      },
+      {
+        "lower": 750,
+        "upper": 1000,
+        "lower_inclusive": false,
+        "upper_inclusive": true,
+        "value": 10000,
+        "label": "751 to 1,000 sq m: Rs 10,000"
+      },
+      {
+        "lower": 1000,
+        "upper": 1250,
+        "lower_inclusive": false,
+        "upper_inclusive": true,
+        "value": 12500,
+        "label": "1,001 to 1,250 sq m: Rs 12,500"
+      },
+      {
+        "lower": 1250,
+        "upper": 1500,
+        "lower_inclusive": false,
+        "upper_inclusive": true,
+        "value": 15000,
+        "label": "1,251 to 1,500 sq m: Rs 15,000"
+      },
+      {
+        "lower": 1500,
+        "upper": 2000,
+        "lower_inclusive": false,
+        "upper_inclusive": true,
+        "value": 20000,
+        "label": "1,501 to 2,000 sq m: Rs 20,000"
+      },
+      {
+        "lower": 2000,
+        "upper": 2500,
+        "lower_inclusive": false,
+        "upper_inclusive": true,
+        "value": 25000,
+        "label": "2,001 to 2,500 sq m: Rs 25,000"
+      },
+      {
+        "lower": 2500,
+        "upper": null,
+        "lower_inclusive": false,
+        "upper_inclusive": false,
+        "value": 50000,
+        "label": "Above 2,500 sq m: Rs 50,000"
+      }
     ]
   },
   {
@@ -367,16 +526,56 @@
     "verified_by": "backend-engineer",
     "verified_on": "2026-10-11",
     "rows": [
-      { "use_type": "commercial_shops_factory", "surcharge_pct": 50, "label": "Commercial, shops, factory: item 1 plus 50%" },
-      { "use_type": "factory_admin_block", "surcharge_pct": 0, "label": "Factory admin block: item 1 (no surcharge)" },
-      { "use_type": "shop_cum_residence", "surcharge_pct": 50, "label": "Shop-cum-residence: item 1 plus 50%" },
-      { "use_type": "cinema_up_to_800_seats", "fixed_fee": 15000, "label": "Cinema up to 800 seats: Rs 15,000" },
-      { "use_type": "cinema_above_800_seats", "fixed_fee": 25000, "label": "Cinema above 800 seats: Rs 25,000" },
-      { "use_type": "social_charitable_educational", "surcharge_pct": 0, "label": "Social, charitable, educational: item 1 (no surcharge)" },
-      { "use_type": "external_alteration_no_area", "fixed_fee": 500, "label": "External alteration not adding area: Rs 500" },
-      { "use_type": "alteration_up_to_10pct", "fixed_fee": 500, "label": "Alteration in proposed plan up to 10%: Rs 500" },
-      { "use_type": "alteration_above_10pct", "note": "fresh application required", "label": "Alteration above 10%: fresh application" },
-      { "use_type": "revalidation", "surcharge_pct_of_original": 10, "label": "Revalidation: 10% of original permission fee" }
+      {
+        "use_type": "commercial_shops_factory",
+        "surcharge_pct": 50,
+        "label": "Commercial, shops, factory: item 1 plus 50%"
+      },
+      {
+        "use_type": "factory_admin_block",
+        "surcharge_pct": 0,
+        "label": "Factory admin block: item 1 (no surcharge)"
+      },
+      {
+        "use_type": "shop_cum_residence",
+        "surcharge_pct": 50,
+        "label": "Shop-cum-residence: item 1 plus 50%"
+      },
+      {
+        "use_type": "cinema_up_to_800_seats",
+        "fixed_fee": 15000,
+        "label": "Cinema up to 800 seats: Rs 15,000"
+      },
+      {
+        "use_type": "cinema_above_800_seats",
+        "fixed_fee": 25000,
+        "label": "Cinema above 800 seats: Rs 25,000"
+      },
+      {
+        "use_type": "social_charitable_educational",
+        "surcharge_pct": 0,
+        "label": "Social, charitable, educational: item 1 (no surcharge)"
+      },
+      {
+        "use_type": "external_alteration_no_area",
+        "fixed_fee": 500,
+        "label": "External alteration not adding area: Rs 500"
+      },
+      {
+        "use_type": "alteration_up_to_10pct",
+        "fixed_fee": 500,
+        "label": "Alteration in proposed plan up to 10%: Rs 500"
+      },
+      {
+        "use_type": "alteration_above_10pct",
+        "note": "fresh application required",
+        "label": "Alteration above 10%: fresh application"
+      },
+      {
+        "use_type": "revalidation",
+        "surcharge_pct_of_original": 10,
+        "label": "Revalidation: 10% of original permission fee"
+      }
     ]
   },
   {
@@ -389,9 +588,21 @@
     "verified_by": "backend-engineer",
     "verified_on": "2026-10-11",
     "rows": [
-      { "use_type": "residential", "rate_per_sqm": 10, "label": "High-rise residential: Rs 10 per sq m built-up" },
-      { "use_type": "commercial", "surcharge_on_residential_pct": 100, "label": "High-rise commercial: residential rate plus 100%" },
-      { "use_type": "shop_cum_residence", "surcharge_on_residential_pct": 50, "label": "High-rise shop-cum-residence: residential rate plus 50%" }
+      {
+        "use_type": "residential",
+        "rate_per_sqm": 10,
+        "label": "High-rise residential: Rs 10 per sq m built-up"
+      },
+      {
+        "use_type": "commercial",
+        "surcharge_on_residential_pct": 100,
+        "label": "High-rise commercial: residential rate plus 100%"
+      },
+      {
+        "use_type": "shop_cum_residence",
+        "surcharge_on_residential_pct": 50,
+        "label": "High-rise shop-cum-residence: residential rate plus 50%"
+      }
     ]
   },
   {
@@ -404,10 +615,27 @@
     "verified_by": "backend-engineer",
     "verified_on": "2026-10-11",
     "rows": [
-      { "type": "initial_validity", "value": 3, "label": "Valid for 3 years from date of sanction" },
-      { "type": "revalidation", "value": 1, "max_terms": 2, "label": "Revalidation: two consecutive terms of 1 year each" },
-      { "type": "max_total", "value": 5, "label": "Maximum 5 years; limit not relaxed" },
-      { "type": "no_lapse_on_execution", "value": null, "label": "Does not lapse once execution of work has begun" }
+      {
+        "type": "initial_validity",
+        "value": 3,
+        "label": "Valid for 3 years from date of sanction"
+      },
+      {
+        "type": "revalidation",
+        "value": 1,
+        "max_terms": 2,
+        "label": "Revalidation: two consecutive terms of 1 year each"
+      },
+      {
+        "type": "max_total",
+        "value": 5,
+        "label": "Maximum 5 years; limit not relaxed"
+      },
+      {
+        "type": "no_lapse_on_execution",
+        "value": null,
+        "label": "Does not lapse once execution of work has begun"
+      }
     ]
   }
 ]

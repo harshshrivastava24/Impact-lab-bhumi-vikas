@@ -33,21 +33,39 @@ The tool locates the governing provisions of the Madhya Pradesh Bhumi Vikas Rule
 | Keyword fallback returning Rule 103 (FR-12) | ✅ |
 | Audit log (FR-38) | ✅ |
 | /api/health, /api/lookup, /api/parse, /api/rules/{rule} | ✅ |
-| /api/plan-check → 501 | ✅ (Phase 3 stub) |
 | Eval harness (17 questions) | ✅ |
 | Frontend static serving | ✅ (requires `npm run build` in frontend/) |
 
-**Evaluation result: 17/17 questions pass (including both not-found cases)**  
-*(Run `python eval/run_eval.py` against a running server to reproduce)*
+**Evaluation result: 14/17 sample questions pass (including both not-found cases); 17/17 geometry cases pass with zero false "no conflict" results.**
+Failing: Q4 (Rule 28 consequence), Q12 (Rule 103 keyword fallback), Q13 (Rule 56(4) garage); all three return not-found instead of the expected citation. NFR-03 needs at least 15.
+*(Run `python eval/run_eval.py`; it falls back to an in-process client when no server is running)*
+
+## What Works (Phase 3, plan check)
+
+| Feature | Status |
+|---|---|
+| `POST /api/plan-check` per the API contract | ✅ |
+| Area mismatch gate (FR-39), `use_dimensions` resolution | ✅ |
+| Refusals: corner plot with both readings, non-residential, height above 12.5 m (FR-48) | ✅ |
+| Footprint validation, 422 naming the field (FR-42) | ✅ |
+| Envelope, footprint, per-side shortfall and overlap rectangles (FR-40, FR-43) | ✅ |
+| FR-47 trace on every side, height-coupled side proviso (FR-44) | ✅ |
+| Derived ground coverage citing Rule 2(20) (FR-51) | ✅ |
+| Rule 53(1)(i) development-type warning | ✅ |
+| Exceptions register `config/exceptions.json` (FR-45) | ✅ |
+| Hindi labels and messages; optional Hindi trace rendering labelled "rendering, not official text" (FR-30) | ✅ |
+| Audit log with geometry inputs and per-side results (FR-49) | ✅ |
+| Geometry eval cases (FR-50): 17/17 | ✅ |
+
+The plan check reads the same `config/range_tables.json` rows as `/api/lookup`. `backend/tests/test_plan_check.py` asserts that both give identical front, rear and side values and development-type warnings.
 
 ## What Does Not Work Yet
 
 | Feature | Phase |
 |---|---|
-| Plot envelope drawing (SVG) | Phase 3 |
-| Plan check / setback conflict detection | Phase 3 |
-| Ground coverage derived from plan (FR-51 derived branch) | Phase 3 |
-| Hindi explanatory rendering via inference | Phase 3 |
+| Plot envelope drawing (SVG), print view | Phase 1 frontend |
+| Sample questions 4, 12, 13 | Phase 2 retrieval |
+| `config/strings.hi.json` machine-drafted; needs review by a Hindi-literate teammate | Phase 1 |
 
 ## Run in Five Steps
 
@@ -96,7 +114,7 @@ python eval/run_eval.py --no-inference
 | `/api/parse` | POST | Free text → params and topics |
 | `/api/lookup` | POST | Main lookup: params + topics → figures + citations |
 | `/api/rules/{rule}` | GET | Single rule citation |
-| `/api/plan-check` | POST | 501 until Phase 3 |
+| `/api/plan-check` | POST | Plan check: params + footprint → envelope, per-side shortfalls, overlaps |
 | `/pdf/en` | GET | English PDF |
 | `/pdf/hi` | GET | Hindi PDF |
 | `/` | GET | Phase 1 frontend (if built) |
