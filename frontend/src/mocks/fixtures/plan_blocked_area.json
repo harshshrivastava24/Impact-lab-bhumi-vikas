@@ -1,0 +1,18 @@
+{
+  "status": "blocked",
+  "figures": [],
+  "citations": [],
+  "version": {
+    "consolidated_to": "2025-03-06",
+    "label": "Derived from MP Bhumi Vikas Rules 2012, consolidated to 6 March 2025"
+  },
+  "amendment_flags": [],
+  "disclaimer": "This is a rule reference, not legal advice. The building-permission clerk decides.",
+  "language": "en",
+  "used_inference": false,
+  "message": "Entered dimensions give 200.00 sq m; stated plot area is 230.00 sq m.",
+  "resolutions": [
+    "correct_inputs",
+    "use_dimensions"
+  ]
+}

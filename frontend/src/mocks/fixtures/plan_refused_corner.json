@@ -1,0 +1,14 @@
+{
+  "status": "refused",
+  "figures": [],
+  "citations": [],
+  "version": {
+    "consolidated_to": "2025-03-06",
+    "label": "Derived from MP Bhumi Vikas Rules 2012, consolidated to 6 March 2025"
+  },
+  "amendment_flags": [],
+  "disclaimer": "This is a rule reference, not legal advice. The building-permission clerk decides.",
+  "language": "en",
+  "used_inference": false,
+  "message": "Rule 56(1)(a) sets the front open space by \"the street facing the plot\", while Rule 65(2) says a plot on two or more streets is deemed to face the wider street for height.\n\nThe Rules do not state which street sets the front open space on a corner plot. Reading one applies the wider street; reading two applies each street to its own frontage. The clerk decides; plan check is not drawn for this case."
+}

@@ -1,5 +1,7 @@
 # Phase 1: Frontend
 
+> Superseded for execution by `frontend-phases/frontend-phases.md`, which splits this work into a UI-only phase and an animation phase using React, TypeScript and Tailwind CSS. Keep this file as the reference for layout and behaviour.
+
 Read `00_SHARED_CONTEXT.md` first. Build the complete clerk-facing interface against the API contract, running on a mock server, so that backend phases can plug in without UI changes.
 
 ## Goal
