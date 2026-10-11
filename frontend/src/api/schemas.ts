@@ -9,7 +9,15 @@ import { z } from 'zod';
  *  - LookupRequest.query_text: free text for backend keyword fallback and
  *    not-found (FR-12, FR-26) when no topic or parameters were parsed.
  *  - PlanCheckRequest.resolution: FR-39 "use_dimensions" resolution.
+ *  - PlanCheck geometry.result_kind: "conflict" | "clear", language-neutral.
  */
+
+/**
+ * Optional field that the FastAPI backend may send as null. Accepts null and
+ * turns it into undefined, so the inferred types stay T | undefined.
+ */
+const optional = <T extends z.ZodTypeAny>(schema: T) =>
+  schema.nullish().transform((v): z.output<T> | undefined => v ?? undefined);
 
 export const LanguageSchema = z.enum(['en', 'hi']);
 export type Language = z.infer<typeof LanguageSchema>;
@@ -71,22 +79,22 @@ const BaseFigureSchema = z.object({
   trace: z.string(),
   rule: z.string(),
   page: z.number().int().positive(),
-  warning: z.string().optional(),
+  warning: optional(z.string()),
 });
 export type Figure = z.infer<typeof BaseFigureSchema> & { cases?: Figure[] };
 export const FigureSchema: z.ZodType<Figure> = BaseFigureSchema.extend({
-  cases: z.lazy(() => z.array(FigureSchema)).optional(),
+  cases: optional(z.lazy(() => z.array(FigureSchema))),
 });
 
 export const CitationSchema = z.object({
   rule: z.string(),
-  sub_rule: z.string().optional(),
+  sub_rule: optional(z.string()),
   title: z.string(),
   part: z.string(),
   page_start: z.number().int().positive(),
   page_end: z.number().int().positive(),
   text_en: z.string(),
-  sub_rule_text_en: z.string().optional(),
+  sub_rule_text_en: optional(z.string()),
   pdf_en_url: z.string(),
   pdf_hi_url: z.string(),
   footnotes: z.array(z.string()),
@@ -112,8 +120,8 @@ export type Resolution = z.infer<typeof ResolutionSchema>;
 
 export const LookupResponseSchema = z.object({
   status: StatusSchema,
-  message: z.string().optional(),
-  resolutions: z.array(ResolutionSchema).optional(),
+  message: optional(z.string()),
+  resolutions: optional(z.array(ResolutionSchema)),
   figures: z.array(FigureSchema),
   citations: z.array(CitationSchema),
   version: z.object({ consolidated_to: z.string(), label: z.string() }),
@@ -202,7 +210,7 @@ export const GeometrySchema = z.object({
 export type Geometry = z.infer<typeof GeometrySchema>;
 
 export const PlanCheckResponseSchema = LookupResponseSchema.extend({
-  geometry: GeometrySchema.optional(),
+  geometry: optional(GeometrySchema),
 });
 export type PlanCheckResponse = z.infer<typeof PlanCheckResponseSchema>;
 

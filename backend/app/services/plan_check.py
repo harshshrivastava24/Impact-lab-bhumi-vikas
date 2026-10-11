@@ -181,7 +181,7 @@ def run(req: dict) -> dict:
     warning = compute.plot_type_warning(params["development_type"], plot_area, frontage, area_note)
     if warning:
         figures.append({"topic": "side_setback", "label": S["label_dev_type_warning"], "value": None, "unit": "",
-                        "derived": False, "conditional": False, "warning": True, "trace": warning["trace"],
+                        "derived": False, "conditional": False, "warning": warning["trace"], "trace": warning["trace"],
                         "rule": warning["rule"], "page": warning["page"]})
 
     cited = [("56", "")]
@@ -207,6 +207,7 @@ def run(req: dict) -> dict:
             "sides": sides,
             "overlaps": laps,
             "result": S["result_conflict"] if conflict else S["result_no_conflict"],
+            "result_kind": "conflict" if conflict else "clear",  # language-neutral, for the frontend
             "checks_performed": [S[f"check_{s}"] for s in geometry.SIDES],
             "not_checked": S["not_checked"],
             "ground_coverage_derived": gc,

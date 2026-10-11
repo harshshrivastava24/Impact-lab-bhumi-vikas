@@ -283,3 +283,22 @@ def test_side_matches_lookup(dev, frontage, height):
 def test_dev_type_warning_matches_lookup(dev, area, frontage):
     fig = compute.compute_side_setback(Params(plot_area=area, development_type=dev, frontage=frontage, height=9))
     assert (setbacks.plot_type_warning(dev, area, frontage) is not None) == (fig.warning is not None)
+
+
+def test_result_kind_is_language_neutral():
+    assert post().json()["geometry"]["result_kind"] == "conflict"
+    assert post(language="hi").json()["geometry"]["result_kind"] == "conflict"
+    clear = post(footprint={"front": 3.0, "rear": 2.5, "left": 2.5, "right": 0}).json()
+    assert clear["geometry"]["result_kind"] == "clear"
+
+
+def test_warning_is_text():
+    body = post({"frontage": 14, "depth": 14.29}, footprint={"front": 3, "rear": 2.5, "left": 3, "right": 0}).json()
+    (w,) = [f for f in body["figures"] if f.get("warning")]
+    assert isinstance(w["warning"], str) and "53(1)(i)" in w["warning"]
+
+
+@pytest.mark.parametrize("lang", ["en", "hi"])
+def test_pdf_short_urls(lang):
+    r = client.get(f"/pdf/{lang}")
+    assert r.status_code == 200 and r.headers["content-type"] == "application/pdf"

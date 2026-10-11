@@ -11,7 +11,8 @@ import os
 import sys
 from pathlib import Path
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
@@ -70,7 +71,14 @@ def create_app() -> FastAPI:
     app.include_router(rules_router.router,  prefix="/api")
     app.include_router(plan_check.router,    prefix="/api")
 
-    # Serve PDFs
+    # Serve PDFs: /pdf/en and /pdf/hi per the API contract; the frontend opens /pdf/en#page=N
+    @app.get("/pdf/{lang}", include_in_schema=False)
+    async def pdf(lang: str):
+        path = {"en": settings.pdf_en_path, "hi": settings.pdf_hi_path}.get(lang)
+        if path is None or not path.exists():
+            raise HTTPException(status_code=404, detail=f"PDF '{lang}' not found")
+        return FileResponse(path, media_type="application/pdf")
+
     resources_dir = ROOT / "resources"
     if resources_dir.exists():
         app.mount("/pdf", StaticFiles(directory=str(resources_dir)), name="pdf")
