@@ -26,8 +26,13 @@ except ImportError:
     print("ERROR: 'requests' library required. Run: pip install requests")
     sys.exit(1)
 
+if sys.platform == "win32":
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+
 EXPECTATIONS_PATH = ROOT / "eval" / "expectations.json"
 DEFAULT_URL = "http://localhost:8000"
+_TEST_CLIENT = None
 
 
 def load_expectations() -> List[Dict]:
@@ -35,7 +40,8 @@ def load_expectations() -> List[Dict]:
 
 
 def run_lookup(base_url: str, case: Dict) -> Optional[Dict]:
-    """Call /api/lookup with the test case params and topics."""
+    """Call /api/lookup with the test case params and topics, with TestClient fallback."""
+    global _TEST_CLIENT
     params = case.get("params", {})
     topics = case.get("topics", [])
     language = case.get("language", "en")
@@ -46,11 +52,20 @@ def run_lookup(base_url: str, case: Dict) -> Optional[Dict]:
         "language": language,
     }
     try:
-        resp = requests.post(f"{base_url}/api/lookup", json=payload, timeout=10)
+        resp = requests.post(f"{base_url}/api/lookup", json=payload, timeout=2)
         return resp.json()
-    except Exception as exc:
-        print(f"  ERROR calling API: {exc}")
-        return None
+    except Exception:
+        # Fallback to in-process TestClient
+        if _TEST_CLIENT is None:
+            try:
+                from starlette.testclient import TestClient
+                from backend.app.main import create_app
+                _TEST_CLIENT = TestClient(create_app())
+            except Exception as e:
+                print(f"  ERROR creating test client: {e}")
+                return None
+        resp = _TEST_CLIENT.post("/api/lookup", json=payload)
+        return resp.json()
 
 
 def check_case(case: Dict, response: Optional[Dict]) -> tuple[bool, str]:
