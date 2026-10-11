@@ -5,7 +5,7 @@
 | Field | Value |
 |---|---|
 | Document | SRS-BVS-001 |
-| Version | 1.1 |
+| Version | 1.2 |
 | Date | 11 October 2026 |
 | Standard | IEEE Std 830-1998 structure |
 | Licence of the described software | MIT |
@@ -16,6 +16,7 @@
 |---|---|---|---|
 | 1.0 | 11 October 2026 | Baseline. | All |
 | 1.1 | 11 October 2026 | Added Plot Envelope Drawing and Setback Plan Check. | 1.2, 1.3, 2.1, 2.2, 2.5, 2.6, FR-01, FR-05, FR-32, new 3.10 (FR-39 to FR-50), NFR-22 to NFR-25, 5.1, 5.2, 6, A.5, B |
+| 1.2 | 11 October 2026 | Review fixes: footprint area corrected in A.5; Rule 56(1)(b) narrow-street handling; geometry mismatch blocks plan check; mandatory plan-check inputs; Rule 53(1)(i) validation; ground coverage defined; footprint drawn; NFR renumbered; amendment flag reworded; Section 6 heading. | 1.3, FR-01, FR-05, FR-14, FR-16, FR-25, FR-32, FR-39 to FR-43, FR-45, FR-50, new FR-51, 4, 6, A.4, A.5, B |
 
 ---
 
@@ -45,7 +46,7 @@ The Tool locates the governing provisions of the Madhya Pradesh Bhumi Vikas Rule
 | Rule version | The consolidation date of the corpus from which a result was derived. |
 | Setback line | The line inside the plot boundary at the required open-space distance, measured perpendicular to that boundary. |
 | Buildable envelope | The rectangle bounded by the four setback lines; the area within which a footprint may sit. |
-| Footprint | The ground-floor outline of the proposed building, entered as one rectangle. |
+| Footprint | The ground-floor outline of the proposed building, entered as one rectangle. Its area is the footprint area, distinct from the envelope area. |
 | Shortfall | Required open space minus provided open space on a side, in metres; zero when the footprint does not cross the setback line. |
 | Inference service | An optional external text-processing API used only for parsing free text and for Hindi rendering of explanatory text. |
 
@@ -138,8 +139,8 @@ Each requirement is mandatory ("shall"), atomic and testable. Acceptance criteri
 ### 3.1 Query Intake
 
 **FR-01 Structured form input**
-The Tool shall provide a form accepting the following parameters: plot area (sq m), road width (m), use type (residential, commercial, public/semi-public, industrial, agricultural), proposed built-up area (sq m), proposed building height (m), development type (detached, semi-detached, row), plot frontage (m), plot depth (m), and optional floor-to-floor height (m). Only plot area, road width and use type shall be mandatory; frontage and depth shall become mandatory when the plan check topic is selected.
-AC: Submitting plot area 200, road width 9, use type residential yields a result without further input; selecting plan check without depth produces a field-level prompt.
+The Tool shall provide a form accepting the following parameters: plot area (sq m), road width (m), use type (residential, commercial, public/semi-public, industrial, agricultural), proposed built-up area (sq m), proposed building height (m), development type (detached, semi-detached, row), plot frontage (m), plot depth (m), and optional floor-to-floor height (m). Only plot area, road width and use type shall be mandatory for rule lookup. When the plan check topic is selected, frontage, depth, development type, proposed height and the FR-42 footprint shall also be mandatory. Built-up area shall be mandatory when a fee topic is selected.
+AC: Plot area 200, road width 9, residential yields a lookup result; selecting plan check without development type produces a field-level prompt.
 
 **FR-02 Free-text input parsing**
 The Tool shall accept a single short text input in English or Hindi and map it to the FR-01 parameter set by extracting numeric values, units and keywords. Parsed values shall be shown in the form for confirmation before lookup. The parsing path shall produce nothing but populated fields and a detected language.
@@ -154,7 +155,7 @@ The Tool shall validate each parameter for type and range (plot area 1 to 100,00
 AC: Road width "-3" is rejected with a message naming the field.
 
 **FR-05 Topic selection**
-The Tool shall allow the clerk to select one or more topics: front setback, rear setback, side setback, height limit, FAR and permitted floor area, ground coverage, application fee, permission fee, permission validity, documents required, plan check. When parsed text names a topic, it shall be pre-selected.
+The Tool shall allow the clerk to select one or more topics: front setback, rear setback, side setback, height limit, FAR and permitted floor area, ground coverage (FR-51), application fee, permission fee, permission validity, documents required, plan check. When parsed text names a topic, it shall be pre-selected.
 AC: Question 10 pre-selects rear setback.
 
 ### 3.2 Rule Retrieval
@@ -194,16 +195,16 @@ Each table used for computation shall be held as a structured range table (lower
 AC: Road width 9.0 m resolves to Rule 56(1)(a) row 1 (3.0 m); 9.1 m resolves to row 2 (3.6 m).
 
 **FR-14 Front setback computation**
-The Tool shall return the minimum front open space from Rule 56(1)(a) for residential buildings up to 12.5 m, and from Rule 42 Tables 4 or 5 otherwise.
-AC: 9 m road, residential, height up to 12.5 m returns 3.0 m.
+The Tool shall return the minimum front open space from Rule 56(1)(a) for residential buildings up to 12.5 m, and from Rule 42 Tables 4 or 5 otherwise. When road width is under 6.0 m, the Tool shall ask whether the plot is in an existing developed area; if yes, it shall apply Rule 56(1)(b), building line 6.0 m from the street centre line, computed as 6.0 minus half the road width from the plot boundary, and shall cite 56(1)(b) and Rule 46 in place of the table row; if no, it shall apply the table row and state that 56(1)(b) was considered and not applied.
+AC: 9 m road returns 3.0 m from 56(1)(a); 5 m road in an existing developed area returns 3.5 m from 56(1)(b).
 
 **FR-15 Rear setback computation**
 The Tool shall return the minimum rear open space from Rule 56(2)(a) by plot area.
 AC: 150 sq m returns 1.50 m; 200 sq m returns 2.50 m.
 
 **FR-16 Side setback computation**
-The Tool shall return side open space from Rule 56(3) by development type, height and frontage, stating which proviso applied. Without a development type, it shall derive permissible types from Rule 53(1)(i) and present each case.
-AC: 200 sq m, frontage 9 m, semi-detached, height 10 m returns 2.5 m on one side with the proviso cited.
+The Tool shall return side open space from Rule 56(3) by development type, height and frontage, stating which proviso applied. Without a development type, it shall derive permissible types from Rule 53(1)(i) by both plot area and frontage and present each case. When a development type is supplied, the Tool shall validate it against the Rule 53(1)(i) plot-size and frontage ranges and shall flag an out-of-range combination, citing the row.
+AC: 200 sq m, frontage 9 m, semi-detached, height 10 m returns 2.5 m on one side with the proviso cited; 200 sq m, frontage 14 m, semi-detached is flagged because frontage exceeds 12 m.
 
 **FR-17 Height limit**
 The Tool shall determine maximum height from Rule 42 Table 4 or 5 by road width. Below the smallest entry (12 m), it shall report that Rule 42 does not apply and Rule 56 norms for buildings up to 12.5 m govern.
@@ -240,8 +241,8 @@ The Tool shall hold a data file listing known later amendments with date, rule r
 AC: The register ships with the 28 August 2026 entry for Rule 2(5)(c).
 
 **FR-25 Amendment flag**
-When a query matches an amendment's affected condition or cites an affected rule, the result shall display a prominent flag: amendment date, rule, source link and the statement that the flagged amendment is not applied in the shown figures.
-AC: Plot area 200 sq m triggers the 28 August 2026 flag; 600 sq m does not.
+When a query matches an amendment's affected condition or cites an affected rule, the result shall display a prominent flag labelled "potentially relevant amendment", stating amendment date, rule, what the amendment concerns (for Rule 2(5)(c): the development-permission process, not setback, height, FAR or fee figures), the source and whether it is primary or secondary, and that the amendment is not applied in the shown figures.
+AC: Plot area 200 sq m triggers the 28 August 2026 flag with the process-only wording and source labelled secondary; 600 sq m does not trigger it.
 
 ### 3.5 Not-Found Handling
 
@@ -274,8 +275,8 @@ Each citation shall open R1 at `page_start` of the cited rule in the browser's P
 AC: Clicking Rule 21 opens R1 at page 35.
 
 **FR-32 Counter display**
-The result screen shall show, in order: computed figures with units, the envelope drawing when plan check is selected, rule citations with verbatim text, version stamp, amendment flag if any, disclaimer (C-04), and PDF links, on one screen without horizontal scrolling at 1366 x 768.
-AC: The worked example in Appendix A fits one screen.
+The result screen shall show, in order: computed figures with units, the envelope drawing when plan check is selected, rule citations with verbatim text collapsed to the cited sub-rule and expandable, version stamp, amendment flag if any, disclaimer (C-04), and PDF links. Computed figures, the first citation and the amendment flag shall be visible without scrolling at 1366 x 768; vertical scrolling is permitted below that; horizontal scrolling is not permitted.
+AC: For Appendix A, all figures and the Rule 56(1)(a) citation are visible on load without scrolling.
 
 **FR-33 Print view**
 The Tool shall provide a printable view containing all FR-32 elements.
@@ -310,20 +311,20 @@ AC: Log entry for the worked example contains no name, phone number or address f
 Version 1.1 supports a rectangular plot with one road frontage, residential use, height up to 12.5 m, and the three Rule 53 development types. Geometry is entered as numbers (C-10).
 
 **FR-39 Plot geometry input and consistency check**
-Inputs: plot frontage and depth in metres, each validated in the range 1 to 500 m. Processing: compare frontage x depth with the stated plot area. Output: warning "Entered dimensions give N sq m; stated plot area is M sq m" when the difference exceeds 2 %; the check proceeds on the entered dimensions.
-AC: 10 x 20 with area 200 gives no warning; with area 230 it gives the warning.
+Inputs: plot frontage and depth in metres, each validated in the range 1 to 500 m. Processing: compare frontage x depth with the stated plot area. When the difference exceeds 2 %, the Tool shall block the plan check and show "Entered dimensions give N sq m; stated plot area is M sq m", offering two resolutions: correct the inputs, or use frontage x depth as the plot area for every calculation. No result shall mix the two values.
+AC: 10 x 20 with area 200 proceeds; with area 230 the check is blocked until the clerk chooses a resolution, after which rear setback and development type use the chosen area.
 
 **FR-40 Envelope computation**
-Inputs: FR-39 geometry, road width, plot area, development type, proposed height. Processing: required open space per side from the FR-13 range tables (front Rule 56(1)(a), rear 56(2)(a), sides 56(3) with 53(1)(i) for permissible types). Output: four required distances with rule, sub-rule and page, and envelope width, depth and area.
-AC: Appendix A.5 inputs give front 3.0 m, rear 2.5 m, sides 2.5 m and 0 m, envelope 7.5 x 14.5 m, 108.75 sq m.
+Inputs: FR-39 geometry, road width, plot area, development type validated per FR-16, proposed height. Processing: required open space per side from the FR-13 range tables (front Rule 56(1)(a) or 56(1)(b) per FR-14, rear 56(2)(a), sides 56(3)). Output: four required distances with rule, sub-rule and page, and envelope width, depth and envelope area, labelled as such.
+AC: Appendix A.5 inputs give front 3.0 m, rear 2.5 m, sides 2.5 m and 0 m, envelope 7.5 x 14.5 m, envelope area 108.75 sq m.
 
 **FR-41 To-scale drawing**
-The Tool shall render a vector drawing with the plot boundary, road edge at the bottom, each setback line labelled with distance and rule, the buildable envelope with its dimensions and area, and a scale bar, legible at 1366 x 768 without zoom.
-AC: Four labelled setback lines and one envelope label are visible for the A.5 case.
+The Tool shall render a vector drawing with the plot boundary, road edge at the bottom, each setback line labelled with distance and rule, the buildable envelope with its dimensions and envelope area, the proposed footprint outline with its dimensions and footprint area once entered, and a scale bar, legible at 1366 x 768 without zoom.
+AC: Four labelled setback lines, one envelope label and one footprint outline with label are visible for the A.5 case.
 
 **FR-42 Footprint input**
-The clerk shall enter the footprint as one rectangle, by four distances from the plot boundaries or by width, depth, front offset and left offset. A footprint extending outside the plot shall be rejected.
-AC: Front 2.4, rear 3.1, left 1.0, right 1.5 on a 10 x 20 m plot is accepted; left 11 is rejected.
+The clerk shall enter the footprint as one rectangle, by four distances from the plot boundaries or by width, depth, front offset and left offset. A footprint extending outside the plot, or with zero or negative width or depth, shall be rejected. The Tool shall compute and display footprint area = footprint width x footprint depth.
+AC: Front 2.4, rear 2.5, left 2.5, right 0 on a 10 x 20 m plot is accepted with footprint area 113.25 sq m; left 11 is rejected; front 10 and rear 10 on a 20 m deep plot is rejected.
 
 **FR-43 Overlap computation and marking**
 Per side, shortfall = max(0, required minus provided), by rectangle arithmetic only. Output: a per-side table of required, provided, shortfall, rule and page, and the overlap drawn hatched with a numeric label.
@@ -334,7 +335,7 @@ When proposed height crosses a Rule 56(3) threshold (7 m detached with frontage 
 AC: Height 10 m to 10.5 m in the A.5 case changes the side space from 2.5 m to 3.0 m with the notice shown.
 
 **FR-45 Exceptions register**
-The Tool shall display beside the result a selectable list drawn from `config/exceptions.json`: garage at the rear end of the side open space (Rule 56(4)); projections governed by Rule 58; existing streets under 6 m where Rule 56(1)(b) and Rule 46 apply. Selecting an exception shall not remove the overlap from the drawing; it shall annotate it "clerk-marked exception, see Rule N".
+The Tool shall display beside the result a selectable list drawn from `config/exceptions.json`: garage at the rear end of the side open space (Rule 56(4)); projections governed by Rule 58. Selecting an exception shall not remove the overlap from the drawing; it shall annotate it "clerk-marked exception, see Rule N". Narrow streets are not an exception; they are computed under FR-14.
 AC: Selecting the garage exception keeps the hatched region and adds the annotation citing Rule 56(4).
 
 **FR-46 Result wording and limitation statement**
@@ -354,8 +355,12 @@ The FR-33 print view shall include the drawing and per-side table. The FR-38 log
 AC: Print preview of A.5 is one page; the log entry holds the four shortfall values.
 
 **FR-50 Geometry test cases**
-`eval/expectations.json` shall hold at least six geometry cases: no conflict; single-side shortfall; height-coupled change; area warning; corner-plot refusal; the A.5 example. The FR-34 script shall run and report them.
-AC: The script prints six geometry lines in addition to the 17 sample questions.
+`eval/expectations.json` shall hold at least twelve geometry cases: no conflict; a shortfall on each of the four sides; road width exactly 9.0 m and 9.1 m; height exactly 10.0 m and 10.1 m for semi-detached; a 5 m street in an existing developed area; area mismatch blocked; development type out of Rule 53(1)(i) range; corner-plot refusal; the A.5 example. The FR-34 script shall run and report them.
+AC: The script prints at least twelve geometry lines in addition to the 17 sample questions.
+
+**FR-51 Ground coverage**
+For residential buildings up to 12.5 m the Rules set no ground coverage percentage; the Tool shall compute ground coverage as envelope area divided by plot area, labelled "derived from setbacks, not a prescribed percentage", with the Rule 2(20) definition cited. For cases governed by Rule 42 Table 5 or Rules 53, 95 and 96 the prescribed percentage shall be returned from the range table.
+AC: The A.5 case returns 54.4 % labelled derived; a Table 5 high-rise case returns 30 %.
 
 ---
 
@@ -371,9 +376,10 @@ AC: The script prints six geometry lines in addition to the 17 sample questions.
 | NFR-06 | Reliability | Unhandled errors visible to the clerk | None in a 200-query soak run |
 | NFR-07 | Availability | Counter hours 10:30 to 17:30, Monday to Saturday | At least 99 % over one week; no external dependency in local operation |
 | NFR-08 | Usability | First use without training | 3 untrained testers complete the worked example in 60 s or less |
-| NFR-09 | Usability | Interaction cost | 4 clicks or entries or fewer from blank form to result |
-| NFR-10 | Localisation | Hindi labels and messages | 100 % of interface strings in both languages, in a resource file |
-| NFR-11 | Maintainability | Corpus or table update | Zero code changes; documented in README |
+| NFR-09 | Usability | Interaction cost, rule lookup | 4 clicks or entries or fewer from blank form to result |
+| NFR-10 | Usability | Interaction cost, plan check | 12 clicks or entries or fewer from blank form to drawing with result; 90 s or less for an untrained tester |
+| NFR-11 | Localisation | Hindi labels and messages | 100 % of interface strings in both languages, in a resource file |
+| NFR-12 | Maintainability | Corpus or table update | Zero code changes; documented in README |
 | NFR-13 | Portability | Install | 5 documented steps or fewer on Windows and Ubuntu; runs without GPU |
 | NFR-14 | Security | Secrets | None in repository; pre-push check for key patterns |
 | NFR-15 | Security | Personal data | None collected, stored or logged (FR-38) |
@@ -425,9 +431,9 @@ AC: The script prints six geometry lines in addition to the 17 sample questions.
 
 ---
 
-## 6. Traceability Matrix
+## 6. Traceability Matrix: Track 1 Jury Checks
 
-Jury criteria for Track 1 (R8): J1 rule number and text shown on every answer; J2 "not found" when the Rules are silent, never an invented rule; J3 table figures correct; J4 measured accuracy on sample questions.
+R8 scores four rubric dimensions (day-one impact, product, idea, clarity of demo) and lists four Track 1 checks the jury looks for. This matrix maps requirements to those four checks: J1 rule number and text shown on every answer; J2 "not found" when the Rules are silent, never an invented rule; J3 table figures correct; J4 measured accuracy on sample questions. The rubric dimensions are addressed by the README and demo, not by this matrix.
 
 | Requirement | J1 | J2 | J3 | J4 |
 |---|---|---|---|---|
@@ -457,6 +463,7 @@ Jury criteria for Track 1 (R8): J1 rule number and text shown on every answer; J
 | FR-45 Exceptions register | X | X | | |
 | FR-46, FR-48 Result wording, limitation, refusal | X | X | | |
 | FR-49, FR-50 Plan check print, audit, test cases | X | | X | X |
+| FR-51 Ground coverage | X | X | X | |
 | NFR-03, NFR-04, NFR-05 | | X | X | X |
 | NFR-24, NFR-25 Geometry accuracy and traceability | X | | X | X |
 | NFR-18 Degraded mode | X | X | X | |
@@ -506,20 +513,21 @@ Jury criteria for Track 1 (R8): J1 rule number and text shown on every answer; J
 
 - Verbatim English text of Rule 56(1)(a) including the four-row table, with links "Open EN PDF p. 77" and "Open HI PDF p. 77".
 - Version stamp: "Derived from MP Bhumi Vikas Rules 2012, consolidated to 6 March 2025."
-- Amendment flag: "28 August 2026 amendment to Rule 2(5)(c) concerns plots up to 500 sq m. This plot is 200 sq m. The amendment text is not in this corpus and is not applied here. Source: R7."
+- Amendment flag: "Potentially relevant amendment. 28 August 2026, Rule 2(5)(c), plots up to 500 sq m: concerns whether separate development permission is needed, subject to Development Plan conformity. It does not change the setback, height, FAR or fee figures shown. Not applied here. Source: R7, secondary notice; gazette text not in corpus."
 - Disclaimer: "This is a rule reference, not legal advice. The building-permission clerk decides."
 
 ### A.5 Plan Check Extension
 
-The clerk adds frontage 10 m, depth 20 m, semi-detached, height 10 m. Rule 56(3)(ii) gives 3.0 m on one side, reduced to 2.5 m because height and frontage are both 10 m or less; the other side is nil. The citizen can correct the plan at the counter before paying fees.
+The clerk adds frontage 10 m, depth 20 m, semi-detached, height 10 m. FR-39 passes (10 x 20 = 200). FR-16 validates semi-detached against Rule 53(1)(i): plot 125 to 225 sq m and frontage 8 to 12 m, both satisfied. Rule 56(3)(ii) gives 3.0 m on one side, reduced to 2.5 m because height and frontage are both 10 m or less; the other side is nil. The citizen can correct the plan at the counter before paying fees.
 
 | Envelope step | Value | Trace |
 |---|---|---|
 | Buildable width | 7.5 m | 10 minus 2.5 side (Rule 56(3)(ii), p. 78) minus 0 other side |
 | Buildable depth | 14.5 m | 20 minus 3.0 front (Rule 56(1)(a), p. 77) minus 2.5 rear (Rule 56(2)(a), p. 78) |
 | Envelope area | 108.75 sq m | 7.5 x 14.5 |
+| Ground coverage (derived) | 54.4 % | 108.75 / 200, FR-51 |
 
-Proposed footprint entered as distances from the boundaries: front 2.4 m, rear 2.5 m, left 2.5 m, right 0 m.
+Proposed footprint entered as distances from the boundaries: front 2.4 m, rear 2.5 m, left 2.5 m, right 0 m. Footprint width 7.5 m, depth 15.1 m (20 minus 2.4 minus 2.5), footprint area 113.25 sq m. The footprint exceeds the envelope because it crosses the front setback line.
 
 | Side | Required | Provided | Shortfall | Rule, page |
 |---|---|---|---|---|
@@ -528,7 +536,7 @@ Proposed footprint entered as distances from the boundaries: front 2.4 m, rear 2
 | Left | 2.50 m | 2.50 m | 0.00 m | 56(3)(ii) proviso, p. 78 |
 | Right | 0.00 m | 0.00 m | 0.00 m | 56(3)(ii), p. 78 |
 
-Result: "Setback conflict found", with a hatched and labelled 0.60 m strip along the front, then the limitation statement and disclaimer. Derived note: FAR 1.25 gives 250 sq m; against a 108.75 sq m footprint that is 2.3 floors by area, labelled "derived" and subject to the unmodelled Rule 2 exclusions from floor area.
+Result: "Setback conflict found", with the footprint outline drawn, a hatched and labelled 0.60 m strip along the front, then the limitation statement and disclaimer. Derived note: FAR 1.25 gives 250 sq m total floor area. On the envelope area of 108.75 sq m, the legal maximum footprint, that is 2.30 floors by area. On the proposed footprint area of 113.25 sq m it would be 2.21, but that footprint is not permissible as drawn. Both figures are labelled "derived" and subject to the unmodelled Rule 2 exclusions from floor area.
 
 ---
 
@@ -547,5 +555,7 @@ Result: "Setback conflict found", with a hatched and labelled 0.60 m strip along
 | G-09 | Irregular plots and non-rectangular footprints are not modelled. | Plan check limited to rectangles. | FR-48 refusal; future version. |
 | G-10 | Rule 2 exclusions from floor area (stairs, parking, services) are not modelled. | Floors-by-area figure is an estimate. | Labelled "derived" in A.5; FAR shown separately. |
 | G-11 | A drawing is more persuasive than a number; a range-table transcription error carries higher consequence. | Wrong line drawn with confidence. | NFR-05 row verification; FR-47 trace on every line; PDF link beside the drawing. |
+| G-12 | Rule 56(1)(b) depends on whether the plot is in an "existing developed area", which the Rules do not define and the Tool cannot determine. | Clerk must assert it. | FR-14 asks the clerk; both outcomes cite the rule considered. |
+| G-13 | The 28 August 2026 amendment is known only from a secondary notice; the gazette text is unavailable. | Flag wording may be imprecise. | FR-25 labels the source secondary; administrator replaces it via FR-36 when the gazette is obtained. |
 
 *End of document.*
