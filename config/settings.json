@@ -1,0 +1,15 @@
+{
+  "consolidated_to": "2025-03-06",
+  "version_label": "MP Bhumi Vikas Rules 2012, consolidated to 6 March 2025",
+  "corpus_path": "data/bhumi_vikas_rules.jsonl",
+  "fulltext_path": "data/bhumi_vikas_rules_fulltext_by_page.txt",
+  "pdf_en_path": "resources/MP_Bhumi_Vikas_Rules_2012_upto_2025-03-06_EN.pdf",
+  "pdf_hi_path": "resources/MP_Bhumi_Vikas_Rules_2012_upto_2025-03-06_HI.pdf",
+  "log_path": "logs/queries.jsonl",
+  "relevance_threshold": 0.1,
+  "inference_timeout_s": 5,
+  "devanagari_ratio_threshold": 0.2,
+  "high_rise_height_threshold_m": 15.0,
+  "expected_record_count": 106,
+  "disclaimer": "This is a rule reference, not legal advice. The building-permission clerk decides."
+}

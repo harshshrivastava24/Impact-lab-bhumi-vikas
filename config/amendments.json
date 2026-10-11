@@ -1,0 +1,12 @@
+[
+  {
+    "date": "2026-08-28",
+    "rule": "2(5)(c)",
+    "condition": "plot_area <= 500",
+    "concerns": "whether separate development permission is needed for plots up to 500 sq m, subject to Development Plan conformity; does not change setback, height, FAR or fee figures",
+    "source_url": "https://www.teamlease.com/blog/teamlease-regtech-notice-mp-bvr-2026-amendment",
+    "source_kind": "secondary",
+    "applied": false,
+    "note": "Potentially relevant amendment. 28 August 2026, Rule 2(5)(c), plots up to 500 sq m: concerns whether separate development permission is needed, subject to Development Plan conformity. It does not change the setback, height, FAR or fee figures shown. Not applied here. Source: secondary notice; gazette text not in corpus."
+  }
+]
