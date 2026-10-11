@@ -104,9 +104,11 @@ class Version(BaseModel):
 # ---------------------------------------------------------------------------
 
 class LookupRequest(BaseModel):
-    params: Params
+    params: Params = Field(default_factory=Params)
     topics: List[Topic] = Field(default_factory=list)
     language: Literal["en", "hi"] = "en"
+    query: Optional[str] = None
+    raw_query: Optional[str] = None
 
 
 class LookupResponse(BaseModel):

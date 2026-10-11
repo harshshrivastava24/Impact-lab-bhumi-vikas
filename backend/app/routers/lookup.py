@@ -94,20 +94,31 @@ async def lookup(req: LookupRequest, request: Request) -> LookupResponse:
     figures: List[Figure] = []
     citations: List[Citation] = []
 
+    query_text = req.query or req.raw_query or " ".join(topics)
+
     if not topics:
         # No topics → keyword fallback
-        candidates = keyword_fallback("", corpus, settings)
-        if not candidates:
+        candidates = keyword_fallback(query_text, corpus, settings)
+        if candidates:
             return LookupResponse(
-                status="not_found",
-                message=NOT_FOUND_MSG,
+                status="answered",
                 figures=[],
-                citations=[],
+                citations=candidates,
                 version=version,
                 amendment_flags=amendment_flags,
                 disclaimer=disclaimer,
                 language=language,
             )
+        return LookupResponse(
+            status="not_found",
+            message=NOT_FOUND_MSG,
+            figures=[],
+            citations=[],
+            version=version,
+            amendment_flags=amendment_flags,
+            disclaimer=disclaimer,
+            language=language,
+        )
 
     # Compute figures per topic
     for topic in topics:

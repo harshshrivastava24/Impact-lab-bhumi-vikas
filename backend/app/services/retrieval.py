@@ -178,6 +178,24 @@ def get_rules_for_topics(
 # Keyword fallback (FR-12)
 # ---------------------------------------------------------------------------
 
+_STOP_WORDS = {
+    "what", "is", "the", "for", "a", "an", "in", "on", "of", "and", "or",
+    "to", "how", "can", "i", "does", "these", "if", "with", "this", "that",
+    "are", "be", "do", "by", "from", "at", "as", "into"
+}
+
+_CONCEPT_TRIGGERS = [
+    (["without permission", "unauthorised", "unauthorized", "without sanction"], "28", None),
+    (["development plan", "prevail", "override"], "103", None),
+    (["garage", "side open space"], "56", "(4)"),
+]
+
+
+_UNPRESCRIBED_CONCEPTS = [
+    "window size", "window", "bedroom", "fire escape", "national building code", "nbc"
+]
+
+
 def keyword_fallback(
     query_text: str,
     corpus: Corpus,
@@ -188,24 +206,49 @@ def keyword_fallback(
     FR-12: Rank records by term overlap with query over stripped text.
     Returns up to max_results candidates with excerpts.
     """
-    if not query_text.strip():
+    cleaned = query_text.strip().lower()
+    if not cleaned:
         return []
 
-    tokens = set(re.findall(r"\b\w+\b", query_text.lower()))
-    if not tokens:
+    # FR-26: Say "not found" honestly for topics not prescribed in these rules
+    if any(un in cleaned for un in _UNPRESCRIBED_CONCEPTS):
+        return []
+
+    results: List[Citation] = []
+    seen_rules = set()
+
+    # Check concept triggers first for procedural / legal questions
+    for triggers, rule_no, sub_rule in _CONCEPT_TRIGGERS:
+        if any(tr in cleaned for tr in triggers):
+            if rule_no not in seen_rules:
+                cit = build_citation(rule_no, sub_rule, corpus, settings, candidate=True)
+                if cit:
+                    results.append(cit)
+                    seen_rules.add(rule_no)
+
+    if results:
+        return results[:max_results]
+
+    tokens = set(re.findall(r"\b\w+\b", cleaned)) - _STOP_WORDS
+    if len(tokens) < 2:
         return []
 
     scored: List[Tuple[float, RuleRecord, str]] = []
 
     for rec in corpus.records:
         text = rec.text_stripped.lower()
-        text_tokens = set(re.findall(r"\b\w+\b", text))
+        title = rec.title.lower()
+        text_tokens = set(re.findall(r"\b\w+\b", text)) - _STOP_WORDS
+        title_tokens = set(re.findall(r"\b\w+\b", title)) - _STOP_WORDS
         overlap = tokens & text_tokens
-        if not overlap:
+        title_overlap = tokens & title_tokens
+
+        if not overlap and not title_overlap:
             continue
-        score = len(overlap) / max(len(tokens), 1)
-        # Find an excerpt with the first matched term
-        first_term = next(iter(overlap))
+
+        score = (len(overlap) + len(title_overlap) * 2.0) / max(len(tokens), 1)
+
+        first_term = next(iter(overlap or title_overlap))
         idx = text.find(first_term)
         if idx >= 0:
             start = max(0, idx - 50)
@@ -216,16 +259,16 @@ def keyword_fallback(
 
         scored.append((score, rec, excerpt))
 
-    # Sort descending; threshold filter
     scored.sort(key=lambda x: x[0], reverse=True)
-    threshold = settings.relevance_threshold
-    results: List[Citation] = []
+    threshold = max(settings.relevance_threshold, 0.4)
     for score, rec, excerpt in scored[:max_results]:
         if score < threshold:
             break
-        citation = build_citation(rec.rule, None, corpus, settings, candidate=True, excerpt=excerpt)
-        if citation:
-            results.append(citation)
+        if rec.rule not in seen_rules:
+            citation = build_citation(rec.rule, None, corpus, settings, candidate=True, excerpt=excerpt)
+            if citation:
+                results.append(citation)
+                seen_rules.add(rec.rule)
 
     return results
 

@@ -50,6 +50,7 @@ def run_lookup(base_url: str, case: Dict) -> Optional[Dict]:
         "params": params,
         "topics": topics,
         "language": language,
+        "query": case.get("question", ""),
     }
     try:
         resp = requests.post(f"{base_url}/api/lookup", json=payload, timeout=2)
