@@ -1,0 +1,92 @@
+{
+  "_note": "Values transcribed from the corpus text (master-prompt/00_SHARED_CONTEXT.md). verified_on stays null until a team member compares every row with the English PDF page (NFR-05).",
+  "tables": {
+    "front_56_1a": {
+      "id": "front_56_1a",
+      "title": "Front open space, residential buildings up to 12.5 m",
+      "rule": "56",
+      "sub_rule": "(1)(a)",
+      "page": 77,
+      "unit": "m",
+      "input": "road_width",
+      "verified_by": "corpus text; PDF check pending",
+      "verified_on": null,
+      "rows": [
+        { "lower": null, "upper": 9.0, "lower_inclusive": false, "upper_inclusive": true, "value": 3.0, "label": "up to 9.0 m" },
+        { "lower": 9.0, "upper": 12.0, "lower_inclusive": false, "upper_inclusive": true, "value": 3.6, "label": "more than 9.0 m and up to 12.0 m" },
+        { "lower": 12.0, "upper": 18.0, "lower_inclusive": false, "upper_inclusive": true, "value": 4.5, "label": "more than 12.0 m and up to 18.0 m" },
+        { "lower": 18.0, "upper": null, "lower_inclusive": false, "upper_inclusive": false, "value": 6.0, "label": "above 18.0 m" }
+      ]
+    },
+    "narrow_street_56_1b": {
+      "id": "narrow_street_56_1b",
+      "title": "Building line on narrow streets in existing developed areas",
+      "rule": "56",
+      "sub_rule": "(1)(b)",
+      "page": 77,
+      "unit": "m",
+      "related_rules": ["46"],
+      "verified_by": "corpus text; PDF check pending",
+      "verified_on": null,
+      "street_width_below": 6.0,
+      "building_line_from_centre": 6.0
+    },
+    "rear_56_2a": {
+      "id": "rear_56_2a",
+      "title": "Rear open space by plot area",
+      "rule": "56",
+      "sub_rule": "(2)(a)",
+      "page": 78,
+      "unit": "m",
+      "input": "plot_area",
+      "verified_by": "corpus text; PDF check pending",
+      "verified_on": null,
+      "rows": [
+        { "lower": null, "upper": 40, "lower_inclusive": false, "upper_inclusive": true, "value": 0.0, "label": "up to 40 sq m" },
+        { "lower": 40, "upper": 150, "lower_inclusive": false, "upper_inclusive": true, "value": 1.5, "label": "above 40 and up to 150 sq m" },
+        { "lower": 150, "upper": 225, "lower_inclusive": false, "upper_inclusive": true, "value": 2.5, "label": "above 150 and up to 225 sq m" },
+        { "lower": 225, "upper": null, "lower_inclusive": false, "upper_inclusive": false, "value": 3.0, "label": "above 225 sq m" }
+      ]
+    },
+    "side_56_3": {
+      "id": "side_56_3",
+      "title": "Side open space by development type",
+      "rule": "56",
+      "sub_rule": "(3)",
+      "page": 78,
+      "unit": "m",
+      "verified_by": "corpus text; PDF check pending",
+      "verified_on": null,
+      "types": {
+        "detached": {
+          "sub_rule": "(3)(i)",
+          "both_sides": 3.0,
+          "proviso": { "reduced_value": 1.5, "sides": 1, "height_max": 7.0, "height_max_inclusive": true, "frontage_max": 12.0, "frontage_max_inclusive": false, "label": "one side may be 1.5 m where height is up to 7 m and frontage is under 12 m" }
+        },
+        "semi_detached": {
+          "sub_rule": "(3)(ii)",
+          "one_side": 3.0,
+          "proviso": { "reduced_value": 2.5, "sides": 1, "height_max": 10.0, "height_max_inclusive": true, "frontage_max": 10.0, "frontage_max_inclusive": true, "label": "the side may be 2.5 m where height is up to 10 m and frontage is up to 10 m" }
+        },
+        "row": {
+          "sub_rule": "(3)(iii)",
+          "both_sides": 0.0
+        }
+      }
+    },
+    "plot_type_53_1i": {
+      "id": "plot_type_53_1i",
+      "title": "Plot size and frontage by development type",
+      "rule": "53",
+      "sub_rule": "(1)(i)",
+      "page": 70,
+      "verified_by": "corpus text; PDF check pending",
+      "verified_on": null,
+      "rows": {
+        "detached": { "area": { "lower": 225, "upper": null, "lower_inclusive": false, "upper_inclusive": false }, "frontage": { "lower": 12, "upper": null, "lower_inclusive": false, "upper_inclusive": false }, "label": "detached: plot above 225 sq m, frontage above 12 m" },
+        "semi_detached": { "area": { "lower": 125, "upper": 225, "lower_inclusive": true, "upper_inclusive": true }, "frontage": { "lower": 8, "upper": 12, "lower_inclusive": true, "upper_inclusive": true }, "label": "semi-detached: plot 125 to 225 sq m, frontage 8 to 12 m" },
+        "row": { "area": { "lower": 50, "upper": 225, "lower_inclusive": true, "upper_inclusive": true }, "frontage": { "lower": 4.5, "upper": 12, "lower_inclusive": true, "upper_inclusive": true }, "label": "row: plot 50 to 225 sq m, frontage 4.5 to 12 m" }
+      }
+    }
+  }
+}

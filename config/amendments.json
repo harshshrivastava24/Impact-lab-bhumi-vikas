@@ -1,0 +1,12 @@
+[
+  {
+    "date": "2026-08-28",
+    "rule": "2(5)(c)",
+    "condition": { "field": "plot_area", "op": "<=", "value": 500 },
+    "concerns": "whether separate development permission is needed for plots up to 500 sq m, subject to Development Plan conformity; does not change setback, height, FAR or fee figures",
+    "source_url": "",
+    "source_kind": "secondary",
+    "applied": false,
+    "note": "Known from a TeamLease RegTech notice (SRS R7, read 10 October 2026); gazette text not in corpus. Not applied in the figures shown."
+  }
+]

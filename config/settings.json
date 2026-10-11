@@ -1,0 +1,21 @@
+{
+  "version": {
+    "consolidated_to": "2025-03-06",
+    "label": "MP Bhumi Vikas Rules 2012, consolidated to 6 March 2025"
+  },
+  "paths": {
+    "corpus": "data/bhumi_vikas_rules.jsonl",
+    "pdf_en": "resources/bhumi_vikas_rules_en.pdf",
+    "pdf_hi": "resources/bhumi_vikas_rules_hi.pdf",
+    "log": "logs/queries.jsonl",
+    "frontend_dist": "frontend/dist"
+  },
+  "plan_check": {
+    "area_mismatch_tolerance": 0.02,
+    "max_height": 12.5,
+    "dimension_min": 1,
+    "dimension_max": 500
+  },
+  "ground_coverage_definition": { "rule": "2", "sub_rule": "(20)", "page": null, "_note": "page resolved from the corpus record for Rule 2 when loaded; fill after PDF check" },
+  "inference_timeout_seconds": 5
+}

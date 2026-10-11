@@ -1,0 +1,23 @@
+{
+  "disclaimer": "This is a rule reference, not legal advice. The building-permission clerk decides.",
+  "result_conflict": "Setback conflict found",
+  "result_no_conflict": "No setback conflict found against the checks listed",
+  "not_checked": "Parking, staircase, ventilation shaft, courtyard, fire and structural rules were not checked",
+  "label_front": "Front open space",
+  "label_rear": "Rear open space",
+  "label_left": "Side open space, left",
+  "label_right": "Side open space, right",
+  "label_ground_coverage": "Ground coverage (derived from setbacks, not a prescribed percentage)",
+  "label_dev_type_warning": "Development type outside Rule 53(1)(i) range",
+  "check_front": "Front open space, Rule 56(1)",
+  "check_rear": "Rear open space, Rule 56(2)(a)",
+  "check_left": "Side open space (left), Rule 56(3)",
+  "check_right": "Side open space (right), Rule 56(3)",
+  "msg_area_mismatch": "Entered dimensions give {computed} sq m; stated plot area is {stated} sq m",
+  "msg_refuse_corner": "Corner plot: Rule 56(1)(a) sets the front open space by \"the street facing the plot\", so one reading takes the street the plot faces (its frontage street) and applies the Rule 56(1)(a) row for that street's width.\n\nRule 65(2) lets the wider street govern height, so a second reading takes the wider street to set the front open space as well. The Rules do not state which street sets the front open space; the clerk decides. No drawing is produced for plots abutting two streets.",
+  "msg_refuse_use": "Plan check version 1 supports residential buildings only; see Rule 57 for other occupancies.",
+  "msg_refuse_height": "Plan check version 1 supports buildings up to 12.5 m; Rule 42 Tables 4 and 5 govern above that.",
+  "exception_garage_side_rear": "Garage at the rear end of the side open space",
+  "exception_projections": "Projections governed by Rule 58",
+  "rendering_label": "rendering, not official text"
+}

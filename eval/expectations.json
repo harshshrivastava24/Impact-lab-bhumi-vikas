@@ -1,0 +1,693 @@
+{
+  "questions": [],
+  "questions_note": "The 17 sample questions (FR-34, FR-35) are added in Phase 2 from resources/sample_questions.md, which is not yet in the repository.",
+  "geometry": [
+    {
+      "id": "G01",
+      "name": "No conflict, A.5 plot with footprint on the setback lines",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "answered",
+        "result": "No setback conflict found against the checks listed",
+        "sides": {
+          "front": [
+            3.0,
+            0
+          ],
+          "rear": [
+            2.5,
+            0
+          ],
+          "left": [
+            2.5,
+            0
+          ],
+          "right": [
+            0,
+            0
+          ]
+        }
+      },
+      "verification_page": [
+        77,
+        78
+      ]
+    },
+    {
+      "id": "G02",
+      "name": "A.5 example, front shortfall 0.60",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 2.4,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "answered",
+        "result": "Setback conflict found",
+        "sides": {
+          "front": [
+            3.0,
+            0.6
+          ],
+          "rear": [
+            2.5,
+            0
+          ],
+          "left": [
+            2.5,
+            0
+          ],
+          "right": [
+            0,
+            0
+          ]
+        },
+        "envelope_area": 108.75,
+        "footprint_area": 113.25,
+        "ground_coverage": 54.4,
+        "overlaps": [
+          {
+            "side": "front",
+            "x": 2.5,
+            "y": 2.4,
+            "width": 7.5,
+            "depth": 0.6
+          }
+        ]
+      },
+      "verification_page": [
+        77,
+        78
+      ]
+    },
+    {
+      "id": "G03",
+      "name": "Rear shortfall only",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.0,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "answered",
+        "result": "Setback conflict found",
+        "sides": {
+          "front": [
+            3.0,
+            0
+          ],
+          "rear": [
+            2.5,
+            0.5
+          ],
+          "left": [
+            2.5,
+            0
+          ],
+          "right": [
+            0,
+            0
+          ]
+        },
+        "overlaps": [
+          {
+            "side": "rear",
+            "x": 2.5,
+            "y": 17.5,
+            "width": 7.5,
+            "depth": 0.5
+          }
+        ]
+      },
+      "verification_page": [
+        78
+      ]
+    },
+    {
+      "id": "G04",
+      "name": "Left shortfall only",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.0,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "answered",
+        "result": "Setback conflict found",
+        "sides": {
+          "front": [
+            3.0,
+            0
+          ],
+          "rear": [
+            2.5,
+            0
+          ],
+          "left": [
+            2.5,
+            0.5
+          ],
+          "right": [
+            0,
+            0
+          ]
+        },
+        "overlaps": [
+          {
+            "side": "left",
+            "x": 2.0,
+            "y": 3.0,
+            "width": 0.5,
+            "depth": 14.5
+          }
+        ]
+      },
+      "verification_page": [
+        78
+      ]
+    },
+    {
+      "id": "G05",
+      "name": "Right shortfall on a detached plot (both sides required)",
+      "request": {
+        "params": {
+          "plot_area": 300,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 15,
+          "depth": 20,
+          "development_type": "detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 3.0,
+          "left": 3.0,
+          "right": 2.0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "answered",
+        "result": "Setback conflict found",
+        "warning": false,
+        "sides": {
+          "front": [
+            3.0,
+            0
+          ],
+          "rear": [
+            3.0,
+            0
+          ],
+          "left": [
+            3.0,
+            0
+          ],
+          "right": [
+            3.0,
+            1.0
+          ]
+        },
+        "overlaps": [
+          {
+            "side": "right",
+            "x": 12.0,
+            "y": 3.0,
+            "width": 1.0,
+            "depth": 14.0
+          }
+        ]
+      },
+      "verification_page": [
+        70,
+        78
+      ]
+    },
+    {
+      "id": "G06a",
+      "name": "Road width exactly 9.0 m gives front 3.0",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "answered",
+        "result": "No setback conflict found against the checks listed",
+        "sides": {
+          "front": [
+            3.0,
+            0
+          ]
+        },
+        "trace_contains": {
+          "front": "road width 9.0 m, Rule 56(1)(a) row 1, up to 9.0 m gives 3.0 m, p. 77"
+        }
+      },
+      "verification_page": [
+        77
+      ]
+    },
+    {
+      "id": "G06b",
+      "name": "Road width 9.1 m gives front 3.6",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.1,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "answered",
+        "result": "Setback conflict found",
+        "sides": {
+          "front": [
+            3.6,
+            0.6
+          ]
+        }
+      },
+      "verification_page": [
+        77
+      ]
+    },
+    {
+      "id": "G07a",
+      "name": "Semi-detached height exactly 10.0 m gives side 2.5",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "answered",
+        "result": "No setback conflict found against the checks listed",
+        "sides": {
+          "left": [
+            2.5,
+            0
+          ]
+        }
+      },
+      "verification_page": [
+        78
+      ]
+    },
+    {
+      "id": "G07b",
+      "name": "Semi-detached height 10.1 m gives side 3.0",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.1
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "answered",
+        "result": "Setback conflict found",
+        "sides": {
+          "left": [
+            3.0,
+            0.5
+          ]
+        }
+      },
+      "verification_page": [
+        78
+      ]
+    },
+    {
+      "id": "G08",
+      "name": "Road 5.0 m, existing developed area, front 3.5 from 56(1)(b)",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 5.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0,
+          "existing_developed_area": true
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "answered",
+        "result": "Setback conflict found",
+        "sides": {
+          "front": [
+            3.5,
+            0.5
+          ]
+        },
+        "rule": {
+          "front": "56(1)(b)"
+        },
+        "trace_contains": {
+          "front": "Rule 46"
+        }
+      },
+      "verification_page": [
+        77
+      ]
+    },
+    {
+      "id": "G09a",
+      "name": "Area mismatch: 10 x 20 against stated 230, blocked",
+      "request": {
+        "params": {
+          "plot_area": 230,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "blocked",
+        "message_contains": [
+          "Entered dimensions give 200 sq m; stated plot area is 230 sq m"
+        ]
+      },
+      "verification_page": []
+    },
+    {
+      "id": "G09b",
+      "name": "Area mismatch resolved with use_dimensions: area 200 in every area trace",
+      "request": {
+        "params": {
+          "plot_area": 230,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en",
+        "resolution": "use_dimensions"
+      },
+      "expect": {
+        "status": "answered",
+        "plot_area": 200,
+        "sides": {
+          "rear": [
+            2.5,
+            0
+          ]
+        },
+        "trace_contains": {
+          "rear": "by clerk resolution"
+        }
+      },
+      "verification_page": [
+        78
+      ]
+    },
+    {
+      "id": "G10",
+      "name": "Development type out of Rule 53(1)(i) range: plot 200, frontage 14, semi-detached",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 14,
+          "depth": 14.29,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 3.0,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "answered",
+        "warning": true,
+        "result": "No setback conflict found against the checks listed",
+        "sides": {
+          "left": [
+            3.0,
+            0
+          ]
+        }
+      },
+      "verification_page": [
+        70
+      ]
+    },
+    {
+      "id": "G11",
+      "name": "Corner plot, two streets: refused with both readings",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0,
+          "streets_abutting": 2
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "refused",
+        "message_contains": [
+          "Rule 56(1)(a)",
+          "the street facing the plot",
+          "Rule 65(2)",
+          "the clerk decides",
+          "\n\n"
+        ]
+      },
+      "verification_page": [
+        77
+      ]
+    },
+    {
+      "id": "G12",
+      "name": "Impossible footprint: front 10 and rear 10 on 20 m depth",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 10,
+          "rear": 10,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "http": 422
+      },
+      "verification_page": []
+    },
+    {
+      "id": "G13",
+      "name": "Non-residential use refused",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "commercial",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "refused",
+        "message_contains": [
+          "Plan check version 1 supports residential buildings only; see Rule 57 for other occupancies."
+        ]
+      },
+      "verification_page": []
+    },
+    {
+      "id": "G14",
+      "name": "Height above 12.5 m refused",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 13
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "refused",
+        "message_contains": [
+          "Plan check version 1 supports buildings up to 12.5 m; Rule 42 Tables 4 and 5 govern above that."
+        ]
+      },
+      "verification_page": []
+    }
+  ]
+}
