@@ -299,17 +299,16 @@ class TestParseEndpoint:
         assert data["language"] == "hi"
 
 
-class TestPlanCheckStub:
-    """POST /api/plan-check returns 501 until Phase 3."""
+class TestPlanCheckWired:
+    """POST /api/plan-check is served by Phase 3; incomplete plan-check input is a 422 naming the field."""
 
-    def test_plan_check_501(self, client):
+    def test_plan_check_missing_fields_422(self, client):
         resp = client.post("/api/plan-check", json={
             "params": {"plot_area": 200, "road_width": 9.0, "use_type": "residential"},
             "topics": []
         })
-        assert resp.status_code == 501
-        data = resp.json()
-        assert "Phase 3" in data["detail"] or "not yet" in data["detail"].lower()
+        assert resp.status_code == 422
+        assert resp.json()["field"] == "params.frontage"
 
 
 class TestKeywordFallback:

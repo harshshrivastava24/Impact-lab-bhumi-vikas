@@ -79,7 +79,8 @@ def compute_front_setback(params: Params) -> Figure:
     height = params.height or 0.0  # 0 means unspecified → default to <=12.5 branch
     eda = params.existing_developed_area
 
-    if road < 6.0:
+    # FR-14: eda False means the clerk said "not an existing developed area" -> table row below
+    if road < 6.0 and eda is not False:
         if eda is True:
             # FR-14: building line 6.0 m from street centre
             # distance from plot boundary = 6.0 - road/2
@@ -99,7 +100,7 @@ def compute_front_setback(params: Params) -> Figure:
                 page=77,
             )
         else:
-            # eda is False or None → conditional
+            # eda is None (not answered) → conditional
             val_56_1b = round(6.0 - road / 2.0, 2)
             row = lookup_range("front_56_1a", road)
             val_56_1a = row["value"] if row else None
@@ -154,6 +155,8 @@ def compute_front_setback(params: Params) -> Figure:
                 trace=(
                     f"Road width {road} m → Rule 56(1)(a) row: '{row_label}' gives {row['value']} m. "
                     f"Rule 56(1)(a), p. 77."
+                    + (" Rule 56(1)(b) considered and not applied (not an existing developed area)."
+                       if road < 6.0 else "")
                 ),
                 rule="56",
                 page=77,

@@ -1,252 +1,1019 @@
-[
-  {
-    "id": 1,
-    "question": "What is the front setback for a residential plot on a 9 m road?",
-    "language": "en",
-    "params": {
-      "plot_area": 200,
-      "road_width": 9.0,
-      "use_type": "residential"
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "What is the front setback for a residential plot on a 9 m road?",
+      "language": "en",
+      "params": {
+        "plot_area": 200,
+        "road_width": 9.0,
+        "use_type": "residential"
+      },
+      "topics": [
+        "front_setback"
+      ],
+      "expected_rules": [
+        "56"
+      ],
+      "expected_figures": {
+        "front_setback": 3.0
+      },
+      "expect_not_found": false,
+      "verification_page": 77,
+      "note": "Rule 56(1)(a) row 1: road up to 9.0 m gives 3.0 m"
     },
-    "topics": ["front_setback"],
-    "expected_rules": ["56"],
-    "expected_figures": {"front_setback": 3.0},
-    "expect_not_found": false,
-    "verification_page": 77,
-    "note": "Rule 56(1)(a) row 1: road up to 9.0 m gives 3.0 m"
-  },
-  {
-    "id": 2,
-    "question": "What is the rear setback for a plot of 200 sq m?",
-    "language": "en",
-    "params": {
-      "plot_area": 200,
-      "road_width": 9.0,
-      "use_type": "residential"
+    {
+      "id": 2,
+      "question": "What is the rear setback for a plot of 200 sq m?",
+      "language": "en",
+      "params": {
+        "plot_area": 200,
+        "road_width": 9.0,
+        "use_type": "residential"
+      },
+      "topics": [
+        "rear_setback"
+      ],
+      "expected_rules": [
+        "56"
+      ],
+      "expected_figures": {
+        "rear_setback": 2.5
+      },
+      "expect_not_found": false,
+      "verification_page": 78,
+      "note": "Rule 56(2)(a) row 3: above 150 and up to 225 sq m gives 2.50 m"
     },
-    "topics": ["rear_setback"],
-    "expected_rules": ["56"],
-    "expected_figures": {"rear_setback": 2.50},
-    "expect_not_found": false,
-    "verification_page": 78,
-    "note": "Rule 56(2)(a) row 3: above 150 and up to 225 sq m gives 2.50 m"
-  },
-  {
-    "id": 3,
-    "question": "What is the maximum FAR for a residential building?",
-    "language": "en",
-    "params": {
-      "plot_area": 200,
-      "road_width": 9.0,
-      "use_type": "residential"
+    {
+      "id": 3,
+      "question": "What is the maximum FAR for a residential building?",
+      "language": "en",
+      "params": {
+        "plot_area": 200,
+        "road_width": 9.0,
+        "use_type": "residential"
+      },
+      "topics": [
+        "far"
+      ],
+      "expected_rules": [
+        "61"
+      ],
+      "expected_figures": {
+        "far": 1.25
+      },
+      "expect_not_found": false,
+      "verification_page": 83,
+      "note": "Rule 61 Table 8 row 1: residential FAR 1.25"
     },
-    "topics": ["far"],
-    "expected_rules": ["61"],
-    "expected_figures": {"far": 1.25},
-    "expect_not_found": false,
-    "verification_page": 83,
-    "note": "Rule 61 Table 8 row 1: residential FAR 1.25"
-  },
-  {
-    "id": 4,
-    "question": "What happens if I build without permission?",
-    "language": "en",
-    "params": {},
-    "topics": [],
-    "expected_rules": ["28"],
-    "expected_figures": {},
-    "expect_not_found": false,
-    "verification_page": 48,
-    "note": "Rule 28 answers the consequence; the deadline is in the parent Act, not the Rules. Pass on Rule 28 citation."
-  },
-  {
-    "id": 5,
-    "question": "What is the side setback for a semi-detached building of 200 sq m with frontage 10 m and height 10 m?",
-    "language": "en",
-    "params": {
-      "plot_area": 200,
-      "road_width": 9.0,
-      "use_type": "residential",
-      "development_type": "semi_detached",
-      "frontage": 10.0,
-      "height": 10.0
+    {
+      "id": 4,
+      "question": "What happens if I build without permission?",
+      "language": "en",
+      "params": {},
+      "topics": [],
+      "expected_rules": [
+        "28"
+      ],
+      "expected_figures": {},
+      "expect_not_found": false,
+      "verification_page": 48,
+      "note": "Rule 28 answers the consequence; the deadline is in the parent Act, not the Rules. Pass on Rule 28 citation."
     },
-    "topics": ["side_setback"],
-    "expected_rules": ["56"],
-    "expected_figures": {"side_setback": 2.5},
-    "expect_not_found": false,
-    "verification_page": 78,
-    "note": "Semi-detached, height <= 10 m, frontage <= 10 m: proviso gives 2.5 m on open side"
-  },
-  {
-    "id": 6,
-    "question": "What documents are required for building permission?",
-    "language": "en",
-    "params": {},
-    "topics": ["documents_required"],
-    "expected_rules": ["14", "16"],
-    "expected_figures": {},
-    "expect_not_found": false,
-    "verification_page": 33,
-    "note": "Procedural: rules 14 and 16 list required documents"
-  },
-  {
-    "id": 7,
-    "question": "How long is building permission valid?",
-    "language": "en",
-    "params": {},
-    "topics": ["permission_validity"],
-    "expected_rules": ["23"],
-    "expected_figures": {},
-    "expect_not_found": false,
-    "verification_page": 41,
-    "note": "Rule 23: 3 years initial validity, up to 2 revalidations of 1 year, 5 year total max"
-  },
-  {
-    "id": 8,
-    "question": "What is the application fee for a building with 250 sq m built-up area?",
-    "language": "en",
-    "params": {
-      "plot_area": 200,
-      "road_width": 9.0,
-      "use_type": "residential",
-      "built_up_area": 250
+    {
+      "id": 5,
+      "question": "What is the side setback for a semi-detached building of 200 sq m with frontage 10 m and height 10 m?",
+      "language": "en",
+      "params": {
+        "plot_area": 200,
+        "road_width": 9.0,
+        "use_type": "residential",
+        "development_type": "semi_detached",
+        "frontage": 10.0,
+        "height": 10.0
+      },
+      "topics": [
+        "side_setback"
+      ],
+      "expected_rules": [
+        "56"
+      ],
+      "expected_figures": {
+        "side_setback": 2.5
+      },
+      "expect_not_found": false,
+      "verification_page": 78,
+      "note": "Semi-detached, height <= 10 m, frontage <= 10 m: proviso gives 2.5 m on open side"
     },
-    "topics": ["application_fee"],
-    "expected_rules": ["21"],
-    "expected_figures": {"application_fee": 250.0},
-    "expect_not_found": false,
-    "verification_page": 35,
-    "note": "Rule 21(2)(ii): Rs 1.00 x 250 sq m = Rs 250"
-  },
-  {
-    "id": 9,
-    "question": "What is the permission fee for a residential building of 250 sq m built-up?",
-    "language": "en",
-    "params": {
-      "plot_area": 200,
-      "road_width": 9.0,
-      "use_type": "residential",
-      "built_up_area": 250
+    {
+      "id": 6,
+      "question": "What documents are required for building permission?",
+      "language": "en",
+      "params": {},
+      "topics": [
+        "documents_required"
+      ],
+      "expected_rules": [
+        "14",
+        "16"
+      ],
+      "expected_figures": {},
+      "expect_not_found": false,
+      "verification_page": 33,
+      "note": "Procedural: rules 14 and 16 list required documents"
     },
-    "topics": ["permission_fee"],
-    "expected_rules": ["21"],
-    "expected_figures": {"permission_fee": 3000.0},
-    "expect_not_found": false,
-    "verification_page": 36,
-    "note": "Rule 21(3)(b) item 1, slab 201 to 300 sq m: Rs 3,000"
-  },
-  {
-    "id": 10,
-    "question": "What is the rear open space for a 150 sq m plot?",
-    "language": "en",
-    "params": {
-      "plot_area": 150,
-      "road_width": 9.0,
-      "use_type": "residential"
+    {
+      "id": 7,
+      "question": "How long is building permission valid?",
+      "language": "en",
+      "params": {},
+      "topics": [
+        "permission_validity"
+      ],
+      "expected_rules": [
+        "23"
+      ],
+      "expected_figures": {},
+      "expect_not_found": false,
+      "verification_page": 41,
+      "note": "Rule 23: 3 years initial validity, up to 2 revalidations of 1 year, 5 year total max"
     },
-    "topics": ["rear_setback"],
-    "expected_rules": ["56"],
-    "expected_figures": {"rear_setback": 1.50},
-    "expect_not_found": false,
-    "verification_page": 78,
-    "note": "Rule 56(2)(a) row 2: above 40 and up to 150 sq m gives 1.50 m"
-  },
-  {
-    "id": 11,
-    "question": "What is the height limit on a 9 m road?",
-    "language": "en",
-    "params": {
-      "plot_area": 200,
-      "road_width": 9.0,
-      "use_type": "residential"
+    {
+      "id": 8,
+      "question": "What is the application fee for a building with 250 sq m built-up area?",
+      "language": "en",
+      "params": {
+        "plot_area": 200,
+        "road_width": 9.0,
+        "use_type": "residential",
+        "built_up_area": 250
+      },
+      "topics": [
+        "application_fee"
+      ],
+      "expected_rules": [
+        "21"
+      ],
+      "expected_figures": {
+        "application_fee": 250.0
+      },
+      "expect_not_found": false,
+      "verification_page": 35,
+      "note": "Rule 21(2)(ii): Rs 1.00 x 250 sq m = Rs 250"
     },
-    "topics": ["height_limit"],
-    "expected_rules": ["56", "42"],
-    "expected_figures": {"height_limit": 12.5},
-    "expect_not_found": false,
-    "verification_page": 58,
-    "note": "Road 9 m < 12 m: Rule 42 Table 4 does not apply; Rule 56 governs up to 12.5 m"
-  },
-  {
-    "id": 12,
-    "question": "Does the Development Plan override these rules?",
-    "language": "en",
-    "params": {},
-    "topics": [],
-    "expected_rules": ["103"],
-    "expected_figures": {},
-    "expect_not_found": false,
-    "verification_page": 121,
-    "note": "Keyword fallback: Rule 103 (Development Plan to prevail) must appear among candidates"
-  },
-  {
-    "id": 13,
-    "question": "Can I build a garage in the side open space?",
-    "language": "en",
-    "params": {},
-    "topics": [],
-    "expected_rules": ["56"],
-    "expected_figures": {},
-    "expect_not_found": false,
-    "verification_page": 80,
-    "note": "Rule 56(4): garage at rear end of side open space is permitted with conditions"
-  },
-  {
-    "id": 14,
-    "question": "200 वर्ग मीटर प्लॉट पर 9 मीटर सड़क के लिए सामने की दूरी क्या है?",
-    "language": "hi",
-    "params": {
-      "plot_area": 200,
-      "road_width": 9.0,
-      "use_type": "residential"
+    {
+      "id": 9,
+      "question": "What is the permission fee for a residential building of 250 sq m built-up?",
+      "language": "en",
+      "params": {
+        "plot_area": 200,
+        "road_width": 9.0,
+        "use_type": "residential",
+        "built_up_area": 250
+      },
+      "topics": [
+        "permission_fee"
+      ],
+      "expected_rules": [
+        "21"
+      ],
+      "expected_figures": {
+        "permission_fee": 3000.0
+      },
+      "expect_not_found": false,
+      "verification_page": 36,
+      "note": "Rule 21(3)(b) item 1, slab 201 to 300 sq m: Rs 3,000"
     },
-    "topics": ["front_setback"],
-    "expected_rules": ["56"],
-    "expected_figures": {"front_setback": 3.0},
-    "expect_not_found": false,
-    "verification_page": 77,
-    "note": "Hindi query: plot_area 200, road_width 9 → front setback 3.0 m (Rule 56(1)(a))"
-  },
-  {
-    "id": 15,
-    "question": "आवेदन शुल्क क्या है 250 वर्ग मीटर निर्मित क्षेत्र के लिए?",
-    "language": "hi",
-    "params": {
-      "plot_area": 200,
-      "road_width": 9.0,
-      "use_type": "residential",
-      "built_up_area": 250
+    {
+      "id": 10,
+      "question": "What is the rear open space for a 150 sq m plot?",
+      "language": "en",
+      "params": {
+        "plot_area": 150,
+        "road_width": 9.0,
+        "use_type": "residential"
+      },
+      "topics": [
+        "rear_setback"
+      ],
+      "expected_rules": [
+        "56"
+      ],
+      "expected_figures": {
+        "rear_setback": 1.5
+      },
+      "expect_not_found": false,
+      "verification_page": 78,
+      "note": "Rule 56(2)(a) row 2: above 40 and up to 150 sq m gives 1.50 m"
     },
-    "topics": ["application_fee"],
-    "expected_rules": ["21"],
-    "expected_figures": {"application_fee": 250.0},
-    "expect_not_found": false,
-    "verification_page": 35,
-    "note": "Hindi query: application fee for 250 sq m = Rs 250"
-  },
-  {
-    "id": 16,
-    "question": "What is the required window size for a bedroom?",
-    "language": "en",
-    "params": {},
-    "topics": [],
-    "expected_rules": [],
-    "expected_figures": {},
-    "expect_not_found": true,
-    "verification_page": "not-found",
-    "note": "Window sizes are not prescribed in the MP Bhumi Vikas Rules 2012; expect not-found"
-  },
-  {
-    "id": 17,
-    "question": "What is the fire escape staircase width for a 10-storey building?",
-    "language": "en",
-    "params": {},
-    "topics": [],
-    "expected_rules": [],
-    "expected_figures": {},
-    "expect_not_found": true,
-    "verification_page": "not-found",
-    "note": "Fire escape specifications are not in the MP Bhumi Vikas Rules 2012 (NBC standards apply); expect not-found"
-  }
-]
+    {
+      "id": 11,
+      "question": "What is the height limit on a 9 m road?",
+      "language": "en",
+      "params": {
+        "plot_area": 200,
+        "road_width": 9.0,
+        "use_type": "residential"
+      },
+      "topics": [
+        "height_limit"
+      ],
+      "expected_rules": [
+        "56",
+        "42"
+      ],
+      "expected_figures": {
+        "height_limit": 12.5
+      },
+      "expect_not_found": false,
+      "verification_page": 58,
+      "note": "Road 9 m < 12 m: Rule 42 Table 4 does not apply; Rule 56 governs up to 12.5 m"
+    },
+    {
+      "id": 12,
+      "question": "Does the Development Plan override these rules?",
+      "language": "en",
+      "params": {},
+      "topics": [],
+      "expected_rules": [
+        "103"
+      ],
+      "expected_figures": {},
+      "expect_not_found": false,
+      "verification_page": 121,
+      "note": "Keyword fallback: Rule 103 (Development Plan to prevail) must appear among candidates"
+    },
+    {
+      "id": 13,
+      "question": "Can I build a garage in the side open space?",
+      "language": "en",
+      "params": {},
+      "topics": [],
+      "expected_rules": [
+        "56"
+      ],
+      "expected_figures": {},
+      "expect_not_found": false,
+      "verification_page": 80,
+      "note": "Rule 56(4): garage at rear end of side open space is permitted with conditions"
+    },
+    {
+      "id": 14,
+      "question": "200 वर्ग मीटर प्लॉट पर 9 मीटर सड़क के लिए सामने की दूरी क्या है?",
+      "language": "hi",
+      "params": {
+        "plot_area": 200,
+        "road_width": 9.0,
+        "use_type": "residential"
+      },
+      "topics": [
+        "front_setback"
+      ],
+      "expected_rules": [
+        "56"
+      ],
+      "expected_figures": {
+        "front_setback": 3.0
+      },
+      "expect_not_found": false,
+      "verification_page": 77,
+      "note": "Hindi query: plot_area 200, road_width 9 → front setback 3.0 m (Rule 56(1)(a))"
+    },
+    {
+      "id": 15,
+      "question": "आवेदन शुल्क क्या है 250 वर्ग मीटर निर्मित क्षेत्र के लिए?",
+      "language": "hi",
+      "params": {
+        "plot_area": 200,
+        "road_width": 9.0,
+        "use_type": "residential",
+        "built_up_area": 250
+      },
+      "topics": [
+        "application_fee"
+      ],
+      "expected_rules": [
+        "21"
+      ],
+      "expected_figures": {
+        "application_fee": 250.0
+      },
+      "expect_not_found": false,
+      "verification_page": 35,
+      "note": "Hindi query: application fee for 250 sq m = Rs 250"
+    },
+    {
+      "id": 16,
+      "question": "What is the required window size for a bedroom?",
+      "language": "en",
+      "params": {},
+      "topics": [],
+      "expected_rules": [],
+      "expected_figures": {},
+      "expect_not_found": true,
+      "verification_page": "not-found",
+      "note": "Window sizes are not prescribed in the MP Bhumi Vikas Rules 2012; expect not-found"
+    },
+    {
+      "id": 17,
+      "question": "What is the fire escape staircase width for a 10-storey building?",
+      "language": "en",
+      "params": {},
+      "topics": [],
+      "expected_rules": [],
+      "expected_figures": {},
+      "expect_not_found": true,
+      "verification_page": "not-found",
+      "note": "Fire escape specifications are not in the MP Bhumi Vikas Rules 2012 (NBC standards apply); expect not-found"
+    }
+  ],
+  "geometry": [
+    {
+      "id": "G01",
+      "name": "No conflict, A.5 plot with footprint on the setback lines",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "answered",
+        "result": "No setback conflict found against the checks listed",
+        "sides": {
+          "front": [
+            3.0,
+            0
+          ],
+          "rear": [
+            2.5,
+            0
+          ],
+          "left": [
+            2.5,
+            0
+          ],
+          "right": [
+            0,
+            0
+          ]
+        }
+      },
+      "verification_page": [
+        77,
+        78
+      ]
+    },
+    {
+      "id": "G02",
+      "name": "A.5 example, front shortfall 0.60",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 2.4,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "answered",
+        "result": "Setback conflict found",
+        "sides": {
+          "front": [
+            3.0,
+            0.6
+          ],
+          "rear": [
+            2.5,
+            0
+          ],
+          "left": [
+            2.5,
+            0
+          ],
+          "right": [
+            0,
+            0
+          ]
+        },
+        "envelope_area": 108.75,
+        "footprint_area": 113.25,
+        "ground_coverage": 54.4,
+        "overlaps": [
+          {
+            "side": "front",
+            "x": 2.5,
+            "y": 2.4,
+            "width": 7.5,
+            "depth": 0.6
+          }
+        ]
+      },
+      "verification_page": [
+        77,
+        78
+      ]
+    },
+    {
+      "id": "G03",
+      "name": "Rear shortfall only",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.0,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "answered",
+        "result": "Setback conflict found",
+        "sides": {
+          "front": [
+            3.0,
+            0
+          ],
+          "rear": [
+            2.5,
+            0.5
+          ],
+          "left": [
+            2.5,
+            0
+          ],
+          "right": [
+            0,
+            0
+          ]
+        },
+        "overlaps": [
+          {
+            "side": "rear",
+            "x": 2.5,
+            "y": 17.5,
+            "width": 7.5,
+            "depth": 0.5
+          }
+        ]
+      },
+      "verification_page": [
+        78
+      ]
+    },
+    {
+      "id": "G04",
+      "name": "Left shortfall only",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.0,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "answered",
+        "result": "Setback conflict found",
+        "sides": {
+          "front": [
+            3.0,
+            0
+          ],
+          "rear": [
+            2.5,
+            0
+          ],
+          "left": [
+            2.5,
+            0.5
+          ],
+          "right": [
+            0,
+            0
+          ]
+        },
+        "overlaps": [
+          {
+            "side": "left",
+            "x": 2.0,
+            "y": 3.0,
+            "width": 0.5,
+            "depth": 14.5
+          }
+        ]
+      },
+      "verification_page": [
+        78
+      ]
+    },
+    {
+      "id": "G05",
+      "name": "Right shortfall on a detached plot (both sides required)",
+      "request": {
+        "params": {
+          "plot_area": 300,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 15,
+          "depth": 20,
+          "development_type": "detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 3.0,
+          "left": 3.0,
+          "right": 2.0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "answered",
+        "result": "Setback conflict found",
+        "warning": false,
+        "sides": {
+          "front": [
+            3.0,
+            0
+          ],
+          "rear": [
+            3.0,
+            0
+          ],
+          "left": [
+            3.0,
+            0
+          ],
+          "right": [
+            3.0,
+            1.0
+          ]
+        },
+        "overlaps": [
+          {
+            "side": "right",
+            "x": 12.0,
+            "y": 3.0,
+            "width": 1.0,
+            "depth": 14.0
+          }
+        ]
+      },
+      "verification_page": [
+        70,
+        78
+      ]
+    },
+    {
+      "id": "G06a",
+      "name": "Road width exactly 9.0 m gives front 3.0",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "answered",
+        "result": "No setback conflict found against the checks listed",
+        "sides": {
+          "front": [
+            3.0,
+            0
+          ]
+        },
+        "trace_contains": {
+          "front": "road width 9.0 m, Rule 56(1)(a) row 1, up to 9.0 m gives 3.0 m, p. 77"
+        }
+      },
+      "verification_page": [
+        77
+      ]
+    },
+    {
+      "id": "G06b",
+      "name": "Road width 9.1 m gives front 3.6",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.1,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "answered",
+        "result": "Setback conflict found",
+        "sides": {
+          "front": [
+            3.6,
+            0.6
+          ]
+        }
+      },
+      "verification_page": [
+        77
+      ]
+    },
+    {
+      "id": "G07a",
+      "name": "Semi-detached height exactly 10.0 m gives side 2.5",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "answered",
+        "result": "No setback conflict found against the checks listed",
+        "sides": {
+          "left": [
+            2.5,
+            0
+          ]
+        }
+      },
+      "verification_page": [
+        78
+      ]
+    },
+    {
+      "id": "G07b",
+      "name": "Semi-detached height 10.1 m gives side 3.0",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.1
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "answered",
+        "result": "Setback conflict found",
+        "sides": {
+          "left": [
+            3.0,
+            0.5
+          ]
+        }
+      },
+      "verification_page": [
+        78
+      ]
+    },
+    {
+      "id": "G08",
+      "name": "Road 5.0 m, existing developed area, front 3.5 from 56(1)(b)",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 5.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0,
+          "existing_developed_area": true
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "answered",
+        "result": "Setback conflict found",
+        "sides": {
+          "front": [
+            3.5,
+            0.5
+          ]
+        },
+        "rule": {
+          "front": "56(1)(b)"
+        },
+        "trace_contains": {
+          "front": "Rule 46"
+        }
+      },
+      "verification_page": [
+        77
+      ]
+    },
+    {
+      "id": "G09a",
+      "name": "Area mismatch: 10 x 20 against stated 230, blocked",
+      "request": {
+        "params": {
+          "plot_area": 230,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "blocked",
+        "message_contains": [
+          "Entered dimensions give 200 sq m; stated plot area is 230 sq m"
+        ]
+      },
+      "verification_page": []
+    },
+    {
+      "id": "G09b",
+      "name": "Area mismatch resolved with use_dimensions: area 200 in every area trace",
+      "request": {
+        "params": {
+          "plot_area": 230,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en",
+        "resolution": "use_dimensions"
+      },
+      "expect": {
+        "status": "answered",
+        "plot_area": 200,
+        "sides": {
+          "rear": [
+            2.5,
+            0
+          ]
+        },
+        "trace_contains": {
+          "rear": "by clerk resolution"
+        }
+      },
+      "verification_page": [
+        78
+      ]
+    },
+    {
+      "id": "G10",
+      "name": "Development type out of Rule 53(1)(i) range: plot 200, frontage 14, semi-detached",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 14,
+          "depth": 14.29,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 3.0,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "answered",
+        "warning": true,
+        "result": "No setback conflict found against the checks listed",
+        "sides": {
+          "left": [
+            3.0,
+            0
+          ]
+        }
+      },
+      "verification_page": [
+        70
+      ]
+    },
+    {
+      "id": "G11",
+      "name": "Corner plot, two streets: refused with both readings",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0,
+          "streets_abutting": 2
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "refused",
+        "message_contains": [
+          "Rule 56(1)(a)",
+          "the street facing the plot",
+          "Rule 65(2)",
+          "the clerk decides",
+          "\n\n"
+        ]
+      },
+      "verification_page": [
+        77
+      ]
+    },
+    {
+      "id": "G12",
+      "name": "Impossible footprint: front 10 and rear 10 on 20 m depth",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 10,
+          "rear": 10,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "http": 422
+      },
+      "verification_page": []
+    },
+    {
+      "id": "G13",
+      "name": "Non-residential use refused",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "commercial",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 10.0
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "refused",
+        "message_contains": [
+          "Plan check version 1 supports residential buildings only; see Rule 57 for other occupancies."
+        ]
+      },
+      "verification_page": []
+    },
+    {
+      "id": "G14",
+      "name": "Height above 12.5 m refused",
+      "request": {
+        "params": {
+          "plot_area": 200,
+          "road_width": 9.0,
+          "use_type": "residential",
+          "frontage": 10,
+          "depth": 20,
+          "development_type": "semi_detached",
+          "height": 13
+        },
+        "footprint": {
+          "front": 3.0,
+          "rear": 2.5,
+          "left": 2.5,
+          "right": 0
+        },
+        "language": "en"
+      },
+      "expect": {
+        "status": "refused",
+        "message_contains": [
+          "Plan check version 1 supports buildings up to 12.5 m; Rule 42 Tables 4 and 5 govern above that."
+        ]
+      },
+      "verification_page": []
+    }
+  ]
+}

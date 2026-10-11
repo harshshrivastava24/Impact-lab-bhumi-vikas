@@ -40,3 +40,31 @@ def append_log_entry(
             fh.write(json.dumps(entry, ensure_ascii=False) + "\n")
     except OSError as exc:
         logger.error("Failed to write audit log: %s", exc)
+
+
+# ---------------------------------------------------------------------------
+# Plan check entries (FR-38 extension, FR-49): geometry inputs and per-side results
+# ---------------------------------------------------------------------------
+
+PARAM_FIELDS = (
+    "plot_area", "road_width", "use_type", "built_up_area", "height", "development_type",
+    "frontage", "depth", "floor_to_floor", "existing_developed_area", "streets_abutting",
+)
+
+
+def clean_params(params: Dict[str, Any]) -> Dict[str, Any]:
+    """Keep only the structured parameter fields; free text never reaches the log."""
+    return {k: params[k] for k in PARAM_FIELDS if k in params}
+
+
+def log_plan_check(entry: Dict[str, Any]) -> None:
+    from backend.app.plan_config import log_path
+
+    path = log_path()
+    entry = {"timestamp": datetime.now(timezone.utc).isoformat(), **entry}
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("a", encoding="utf-8") as fh:
+            fh.write(json.dumps(entry, ensure_ascii=False) + "\n")
+    except OSError as exc:
+        logger.error("Failed to write audit log: %s", exc)

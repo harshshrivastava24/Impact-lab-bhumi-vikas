@@ -11,5 +11,15 @@
   "devanagari_ratio_threshold": 0.2,
   "high_rise_height_threshold_m": 15.0,
   "expected_record_count": 106,
-  "disclaimer": "This is a rule reference, not legal advice. The building-permission clerk decides."
+  "disclaimer": "This is a rule reference, not legal advice. The building-permission clerk decides.",
+  "plan_check": {
+    "area_mismatch_tolerance": 0.02,
+    "max_height": 12.5,
+    "dimension_min": 1,
+    "dimension_max": 500
+  },
+  "ground_coverage_definition": {
+    "rule": "2",
+    "sub_rule": "(20)"
+  }
 }
