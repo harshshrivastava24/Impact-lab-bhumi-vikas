@@ -1,0 +1,252 @@
+[
+  {
+    "id": 1,
+    "question": "What is the front setback for a residential plot on a 9 m road?",
+    "language": "en",
+    "params": {
+      "plot_area": 200,
+      "road_width": 9.0,
+      "use_type": "residential"
+    },
+    "topics": ["front_setback"],
+    "expected_rules": ["56"],
+    "expected_figures": {"front_setback": 3.0},
+    "expect_not_found": false,
+    "verification_page": 77,
+    "note": "Rule 56(1)(a) row 1: road up to 9.0 m gives 3.0 m"
+  },
+  {
+    "id": 2,
+    "question": "What is the rear setback for a plot of 200 sq m?",
+    "language": "en",
+    "params": {
+      "plot_area": 200,
+      "road_width": 9.0,
+      "use_type": "residential"
+    },
+    "topics": ["rear_setback"],
+    "expected_rules": ["56"],
+    "expected_figures": {"rear_setback": 2.50},
+    "expect_not_found": false,
+    "verification_page": 78,
+    "note": "Rule 56(2)(a) row 3: above 150 and up to 225 sq m gives 2.50 m"
+  },
+  {
+    "id": 3,
+    "question": "What is the maximum FAR for a residential building?",
+    "language": "en",
+    "params": {
+      "plot_area": 200,
+      "road_width": 9.0,
+      "use_type": "residential"
+    },
+    "topics": ["far"],
+    "expected_rules": ["61"],
+    "expected_figures": {"far": 1.25},
+    "expect_not_found": false,
+    "verification_page": 83,
+    "note": "Rule 61 Table 8 row 1: residential FAR 1.25"
+  },
+  {
+    "id": 4,
+    "question": "What happens if I build without permission?",
+    "language": "en",
+    "params": {},
+    "topics": [],
+    "expected_rules": ["28"],
+    "expected_figures": {},
+    "expect_not_found": false,
+    "verification_page": 48,
+    "note": "Rule 28 answers the consequence; the deadline is in the parent Act, not the Rules. Pass on Rule 28 citation."
+  },
+  {
+    "id": 5,
+    "question": "What is the side setback for a semi-detached building of 200 sq m with frontage 10 m and height 10 m?",
+    "language": "en",
+    "params": {
+      "plot_area": 200,
+      "road_width": 9.0,
+      "use_type": "residential",
+      "development_type": "semi_detached",
+      "frontage": 10.0,
+      "height": 10.0
+    },
+    "topics": ["side_setback"],
+    "expected_rules": ["56"],
+    "expected_figures": {"side_setback": 2.5},
+    "expect_not_found": false,
+    "verification_page": 78,
+    "note": "Semi-detached, height <= 10 m, frontage <= 10 m: proviso gives 2.5 m on open side"
+  },
+  {
+    "id": 6,
+    "question": "What documents are required for building permission?",
+    "language": "en",
+    "params": {},
+    "topics": ["documents_required"],
+    "expected_rules": ["14", "16"],
+    "expected_figures": {},
+    "expect_not_found": false,
+    "verification_page": 33,
+    "note": "Procedural: rules 14 and 16 list required documents"
+  },
+  {
+    "id": 7,
+    "question": "How long is building permission valid?",
+    "language": "en",
+    "params": {},
+    "topics": ["permission_validity"],
+    "expected_rules": ["23"],
+    "expected_figures": {},
+    "expect_not_found": false,
+    "verification_page": 41,
+    "note": "Rule 23: 3 years initial validity, up to 2 revalidations of 1 year, 5 year total max"
+  },
+  {
+    "id": 8,
+    "question": "What is the application fee for a building with 250 sq m built-up area?",
+    "language": "en",
+    "params": {
+      "plot_area": 200,
+      "road_width": 9.0,
+      "use_type": "residential",
+      "built_up_area": 250
+    },
+    "topics": ["application_fee"],
+    "expected_rules": ["21"],
+    "expected_figures": {"application_fee": 250.0},
+    "expect_not_found": false,
+    "verification_page": 35,
+    "note": "Rule 21(2)(ii): Rs 1.00 x 250 sq m = Rs 250"
+  },
+  {
+    "id": 9,
+    "question": "What is the permission fee for a residential building of 250 sq m built-up?",
+    "language": "en",
+    "params": {
+      "plot_area": 200,
+      "road_width": 9.0,
+      "use_type": "residential",
+      "built_up_area": 250
+    },
+    "topics": ["permission_fee"],
+    "expected_rules": ["21"],
+    "expected_figures": {"permission_fee": 3000.0},
+    "expect_not_found": false,
+    "verification_page": 36,
+    "note": "Rule 21(3)(b) item 1, slab 201 to 300 sq m: Rs 3,000"
+  },
+  {
+    "id": 10,
+    "question": "What is the rear open space for a 150 sq m plot?",
+    "language": "en",
+    "params": {
+      "plot_area": 150,
+      "road_width": 9.0,
+      "use_type": "residential"
+    },
+    "topics": ["rear_setback"],
+    "expected_rules": ["56"],
+    "expected_figures": {"rear_setback": 1.50},
+    "expect_not_found": false,
+    "verification_page": 78,
+    "note": "Rule 56(2)(a) row 2: above 40 and up to 150 sq m gives 1.50 m"
+  },
+  {
+    "id": 11,
+    "question": "What is the height limit on a 9 m road?",
+    "language": "en",
+    "params": {
+      "plot_area": 200,
+      "road_width": 9.0,
+      "use_type": "residential"
+    },
+    "topics": ["height_limit"],
+    "expected_rules": ["56", "42"],
+    "expected_figures": {"height_limit": 12.5},
+    "expect_not_found": false,
+    "verification_page": 58,
+    "note": "Road 9 m < 12 m: Rule 42 Table 4 does not apply; Rule 56 governs up to 12.5 m"
+  },
+  {
+    "id": 12,
+    "question": "Does the Development Plan override these rules?",
+    "language": "en",
+    "params": {},
+    "topics": [],
+    "expected_rules": ["103"],
+    "expected_figures": {},
+    "expect_not_found": false,
+    "verification_page": 121,
+    "note": "Keyword fallback: Rule 103 (Development Plan to prevail) must appear among candidates"
+  },
+  {
+    "id": 13,
+    "question": "Can I build a garage in the side open space?",
+    "language": "en",
+    "params": {},
+    "topics": [],
+    "expected_rules": ["56"],
+    "expected_figures": {},
+    "expect_not_found": false,
+    "verification_page": 80,
+    "note": "Rule 56(4): garage at rear end of side open space is permitted with conditions"
+  },
+  {
+    "id": 14,
+    "question": "200 वर्ग मीटर प्लॉट पर 9 मीटर सड़क के लिए सामने की दूरी क्या है?",
+    "language": "hi",
+    "params": {
+      "plot_area": 200,
+      "road_width": 9.0,
+      "use_type": "residential"
+    },
+    "topics": ["front_setback"],
+    "expected_rules": ["56"],
+    "expected_figures": {"front_setback": 3.0},
+    "expect_not_found": false,
+    "verification_page": 77,
+    "note": "Hindi query: plot_area 200, road_width 9 → front setback 3.0 m (Rule 56(1)(a))"
+  },
+  {
+    "id": 15,
+    "question": "आवेदन शुल्क क्या है 250 वर्ग मीटर निर्मित क्षेत्र के लिए?",
+    "language": "hi",
+    "params": {
+      "plot_area": 200,
+      "road_width": 9.0,
+      "use_type": "residential",
+      "built_up_area": 250
+    },
+    "topics": ["application_fee"],
+    "expected_rules": ["21"],
+    "expected_figures": {"application_fee": 250.0},
+    "expect_not_found": false,
+    "verification_page": 35,
+    "note": "Hindi query: application fee for 250 sq m = Rs 250"
+  },
+  {
+    "id": 16,
+    "question": "What is the required window size for a bedroom?",
+    "language": "en",
+    "params": {},
+    "topics": [],
+    "expected_rules": [],
+    "expected_figures": {},
+    "expect_not_found": true,
+    "verification_page": "not-found",
+    "note": "Window sizes are not prescribed in the MP Bhumi Vikas Rules 2012; expect not-found"
+  },
+  {
+    "id": 17,
+    "question": "What is the fire escape staircase width for a 10-storey building?",
+    "language": "en",
+    "params": {},
+    "topics": [],
+    "expected_rules": [],
+    "expected_figures": {},
+    "expect_not_found": true,
+    "verification_page": "not-found",
+    "note": "Fire escape specifications are not in the MP Bhumi Vikas Rules 2012 (NBC standards apply); expect not-found"
+  }
+]

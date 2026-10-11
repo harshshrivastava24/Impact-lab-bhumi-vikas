@@ -1,0 +1,191 @@
+{
+  "front_setback": {
+    "keywords": ["front", "setback", "open space", "road", "building line", "front open space", "मुख", "सामने", "सड़क"],
+    "mappings": [
+      {
+        "use_type": "residential",
+        "condition": "height <= 12.5",
+        "rule": "56",
+        "sub_rule": "(1)(a)",
+        "table_id": "front_56_1a",
+        "note": "For buildings up to 12.5 m"
+      },
+      {
+        "use_type": "residential",
+        "condition": "road_width < 6.0 and existing_developed_area",
+        "rule": "56",
+        "sub_rule": "(1)(b)",
+        "table_id": null,
+        "note": "Narrow street in existing developed area: building line 6.0 m from street centre"
+      },
+      {
+        "use_type": "residential",
+        "condition": "height > 12.5",
+        "rule": "42",
+        "sub_rule": "Table 4",
+        "table_id": "height_42_t4",
+        "note": "For buildings above 12.5 m"
+      },
+      {
+        "use_type": "*",
+        "condition": "high_rise",
+        "rule": "42",
+        "sub_rule": "Table 5",
+        "table_id": "high_rise_42_t5",
+        "note": "For high-rise buildings"
+      }
+    ]
+  },
+  "rear_setback": {
+    "keywords": ["rear", "back", "rear open space", "पीछे", "पश्चिम"],
+    "mappings": [
+      {
+        "use_type": "*",
+        "condition": "height <= 12.5",
+        "rule": "56",
+        "sub_rule": "(2)(a)",
+        "table_id": "rear_56_2a",
+        "note": "By plot area"
+      }
+    ]
+  },
+  "side_setback": {
+    "keywords": ["side", "side open space", "lateral", "बगल", "साइड"],
+    "mappings": [
+      {
+        "use_type": "residential",
+        "condition": "height <= 12.5",
+        "rule": "56",
+        "sub_rule": "(3)",
+        "table_id": "side_56_3",
+        "note": "By development type; also validate against Rule 53(1)(i)"
+      }
+    ]
+  },
+  "height_limit": {
+    "keywords": ["height", "maximum height", "tall", "ऊंचाई", "उचाई"],
+    "mappings": [
+      {
+        "use_type": "*",
+        "condition": "road_width < 12.0",
+        "rule": "56",
+        "sub_rule": null,
+        "table_id": null,
+        "note": "Rule 42 Table 4 requires minimum 12 m road; Rule 56 norms apply for buildings up to 12.5 m"
+      },
+      {
+        "use_type": "*",
+        "condition": "road_width >= 12.0 and not high_rise",
+        "rule": "42",
+        "sub_rule": "Table 4",
+        "table_id": "height_42_t4"
+      },
+      {
+        "use_type": "*",
+        "condition": "high_rise",
+        "rule": "42",
+        "sub_rule": "Table 5",
+        "table_id": "high_rise_42_t5"
+      }
+    ]
+  },
+  "far": {
+    "keywords": ["FAR", "floor area ratio", "floor area", "फ्लोर एरिया", "एफएआर", "floor space", "built-up area"],
+    "mappings": [
+      {
+        "use_type": "*",
+        "condition": null,
+        "rule": "61",
+        "sub_rule": "Table 8",
+        "table_id": "far_61_t8"
+      }
+    ]
+  },
+  "ground_coverage": {
+    "keywords": ["ground coverage", "coverage", "GC", "plinth", "footprint area"],
+    "mappings": [
+      {
+        "use_type": "*",
+        "condition": "high_rise",
+        "rule": "42",
+        "sub_rule": "Table 5",
+        "table_id": "high_rise_42_t5",
+        "note": "Prescribed 30% for high-rise"
+      },
+      {
+        "use_type": "*",
+        "condition": "not high_rise",
+        "rule": "2",
+        "sub_rule": "(20)",
+        "table_id": null,
+        "note": "No prescribed percentage for residential up to 12.5 m; derived from setbacks"
+      }
+    ]
+  },
+  "application_fee": {
+    "keywords": ["application fee", "fee", "application", "शुल्क", "आवेदन शुल्क"],
+    "mappings": [
+      {
+        "use_type": "*",
+        "condition": null,
+        "rule": "21",
+        "sub_rule": "(2)",
+        "table_id": "app_fee_21_2"
+      }
+    ]
+  },
+  "permission_fee": {
+    "keywords": ["permission fee", "sanction fee", "अनुमति शुल्क", "permission"],
+    "mappings": [
+      {
+        "use_type": "*",
+        "condition": "not high_rise",
+        "rule": "21",
+        "sub_rule": "(3)(b)",
+        "table_id": "perm_fee_21_3b_item1"
+      },
+      {
+        "use_type": "*",
+        "condition": "high_rise",
+        "rule": "21",
+        "sub_rule": "(3)(c)",
+        "table_id": "perm_fee_high_rise_21_3c"
+      }
+    ]
+  },
+  "permission_validity": {
+    "keywords": ["validity", "duration", "sanction period", "expire", "valid", "मान्यता", "अवधि"],
+    "mappings": [
+      {
+        "use_type": "*",
+        "condition": null,
+        "rule": "23",
+        "sub_rule": null,
+        "table_id": "duration_23"
+      }
+    ]
+  },
+  "documents_required": {
+    "keywords": ["documents", "required documents", "documents required", "papers", "application documents", "दस्तावेज़"],
+    "mappings": [
+      {
+        "use_type": "*",
+        "condition": null,
+        "rule": "14",
+        "sub_rule": null,
+        "table_id": null
+      },
+      {
+        "use_type": "*",
+        "condition": null,
+        "rule": "16",
+        "sub_rule": null,
+        "table_id": null
+      }
+    ]
+  },
+  "plan_check": {
+    "keywords": ["plan check", "footprint", "setback check", "compliance check", "drawing"],
+    "mappings": []
+  }
+}
